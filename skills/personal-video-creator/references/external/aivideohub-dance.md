@@ -71,4 +71,4 @@
 
 以上是当前指南的创作方向，不是作者原提示词。后续批量创作还应改变动作主体、方向、幅度、速度、表演态度或摄影关系，避免只给同一组手势换衣服和背景。
 
-写新稿先读[单人舞蹈方法](../dance-performance.md)，选择[单人舞短版模板](../../assets/templates/dance-short.txt)；需要多场景、演唱或明显剪辑结构时，用[音乐 MV 模板](../../assets/templates/music-video.txt)。实际音频与新片结果按[反馈流程](../feedback.md)另行记录。
+写新稿先读[统一舞蹈导演](../dance-performance.md)，将此前导演稿的乐句、动作短句、力学和摄影方法与这些样片的互动经验一起使用。按本片选择[单人舞短版模板](../../assets/templates/dance-short.txt)或[音乐 MV 模板](../../assets/templates/music-video.txt)，不强加镜头数量与段落结构。实际音频与新片结果按[反馈流程](../feedback.md)另行记录。

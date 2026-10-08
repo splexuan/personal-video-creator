@@ -46,7 +46,7 @@ skills/personal-video-creator/
     ├── video-core.md                多类型共用写法与检查标准
     ├── directing.md                 观看目标、视觉主意与镜头决策
     ├── life-scenes.md               生活情景创作方法
-    ├── dance-performance.md         单人舞动作、表情、衣发与摄影方法
+    ├── dance-performance.md         舞蹈导演：音乐、编舞、力学、表情与摄影
     ├── feedback.md                  成片反馈与维护方法
     ├── external-methods.md          外部方法、来源与适用条件
     ├── external-cases.md            完整提示词案例研读与具体迁移写法
@@ -69,6 +69,8 @@ skills/personal-video-creator/
 
 已将 [AI Visual Director](https://github.com/jijiutong/ai-visual-director/tree/b47f664ca00c50539c5365109e9360f82170972d)的素材分工、调度、视线、表演与状态方法，以及 [AI Storyboard Director v5.2](https://github.com/62656456/ai-storyboard-director-v5.2/tree/a8d9ad6362ed38d76857199cb9ba92956f87ae5d)的观看终点、视觉概念、信息显露与镜头衔接方法，落实到技能流程、[导演设计](skills/personal-video-creator/references/directing.md)和相关模板。研读范围、适配与未采用的源项目规则见该文件的来源说明。直接交付可用提示词，结构按类型选择；不要求先安装源项目或补做整套参考图。
 
+用户此前提供的《电影级 AI 舞蹈视频编舞导演》与 AIVideoHub_ 样片经验已整合到[统一舞蹈导演](skills/personal-video-creator/references/dance-performance.md)：共同设计音乐乐句、动作短句、身体力学、过渡动量、动态对比、表情、衣发与摄影，再按短互动舞或 MV 的目标选择提示词结构。原文中的固定动作数、旋转次数、表情禁用及 H3 / I2VA 专用格式不作为所有舞蹈的默认限制。
+
 ## 安装
 
 本仓库包含一个技能，目录为 `skills/personal-video-creator`。下载或克隆仓库后，把该目录整体放到个人 Codex 技能目录中；设置了 `CODEX_HOME` 时使用其 `skills` 子目录，否则使用用户主目录下的 `.codex/skills`。
@@ -87,7 +89,7 @@ skills/personal-video-creator/
 
 > 用 $personal-video-creator，按这张成年角色图写一条单人互动舞。固定机位，动作连贯，眼神和笑容自然，服装随动作响应；音乐尚未提供时先写可调整的表演段落。
 
-短随拍和手势舞使用[单人舞短版](skills/personal-video-creator/assets/templates/dance-short.txt)及[舞蹈方法](skills/personal-video-creator/references/dance-performance.md)，无需填满 MV 的五个段落或增加无关剧情。
+短随拍和手势舞使用[单人舞短版](skills/personal-video-creator/assets/templates/dance-short.txt)，音乐表演可用 MV 模板；两者都依据[统一舞蹈导演](skills/personal-video-creator/references/dance-performance.md)，无需填满五个段落或增加无关剧情。
 
 也可要求“给几个机制不同的创意”“按个人视频指南修改节奏”，或提供实际成片和最终提示词进行复盘。已有分镜图时可以使用分镜驱动方法；通常创作不要求先制作图板。
 

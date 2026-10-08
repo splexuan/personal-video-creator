@@ -22,7 +22,7 @@
 | 产品与品牌广告 | 产品主视觉、质感、使用体验与品牌展示 | 产品识别、可见卖点、演示和定版 | [填写模板](../assets/templates/product-commercial.txt) | [Seedance 2.0 可乐商业广告视频](https://goodcase.ai/cases/seedance-2-0-181cb461432f) |
 | 人物分享与 UGC 测评 | 面对镜头分享、开箱、使用演示与体验反应 | 说话者、实际操作、观察与口语回应 | [填写模板](../assets/templates/ugc-review.txt) | [Seedance 2.5 咖啡机竖屏UGC广告](https://goodcase.ai/cases/seedance-2-5-ugc-7de9338ecfc9) |
 | 时装与造型展示 | Lookbook、街拍、走秀与服装细节 | 廓形、材料、配饰与造型之间的区别 | [填写模板](../assets/templates/fashion.txt) | [电影感巴黎时尚广告大片：五镜头街拍](https://goodcase.ai/cases/youmind-paris-fashion-campaign-streetwear) |
-| 音乐 MV 与舞蹈 | 音频驱动编舞、演唱、节奏剪辑与单人互动舞 | 连贯动作、表情、衣发动态与真实音乐依据 | [MV 模板](../assets/templates/music-video.txt)、[单人舞短版](../assets/templates/dance-short.txt)、[舞蹈方法](dance-performance.md) | [单人 K-POP MV · Y2K 糖果世界逐秒分镜](https://goodcase.ai/cases/seedance-25-kpop-mv-zero-to-pop)、[AIVideoHub_ 三条成片观察](external/aivideohub-dance.md) |
+| 音乐 MV 与舞蹈 | 音频驱动编舞、演唱、节奏剪辑与单人互动舞 | 连贯动作、表情、衣发动态与真实音乐依据 | [统一舞蹈导演](dance-performance.md)、[MV 模板](../assets/templates/music-video.txt)、[单人舞短版](../assets/templates/dance-short.txt) | [单人 K-POP MV · Y2K 糖果世界逐秒分镜](https://goodcase.ai/cases/seedance-25-kpop-mv-zero-to-pop)、[AIVideoHub_ 三条成片观察](external/aivideohub-dance.md) |
 | 动作与搏斗 | 攻防、追逐、近身动作与战斗段落 | 攻击意图、闪避、接触、后果与回位 | [填写模板](../assets/templates/action.txt) | [Seedance 涩谷黄金时刻近身格斗短片](https://goodcase.ai/cases/yourplugai-seedance-ai-fb797edfc8e4) |
 | 运动与极限挑战 | 比赛、闯关、跳跃与运动表现 | 路线、重心、完成动作与成绩后反应 | [填写模板](../assets/templates/sports.txt) | [水上闯关决胜前意外落水](https://goodcase.ai/cases/seedance-15-second-ultra-realistic-live-water-game-show-scene-ad357b3bb052) |
 | 车辆与驾驶 | 汽车、摩托、骑行旅程与行驶展示 | 车辆结构、道路连续、接地与摄影来源 | [填写模板](../assets/templates/vehicles.txt) | [Karakoram Motorcycle Commercial](https://goodcase.ai/cases/karakoram-motorcycle-commercial) |
@@ -87,7 +87,7 @@
 
 这些填写模板是从案例方法整理出的个人创作工具，原作者完整提示词通过来源查阅。模板改编的新片仍按[反馈流程](feedback.md)记录实际结果；既有个人案例不因扩充类型而改写。
 
-舞蹈模板的动作短句、支撑与衣发响应也参考本会话提供的《电影级 AI 舞蹈视频编舞导演》。这里迁移编舞方法，平台专用字段按本次实际入口选择。
+用户提供的《电影级 AI 舞蹈视频编舞导演》与三条互动舞样片经验已经整合到[统一舞蹈导演](dance-performance.md)。短独舞与音乐 MV 共用乐句、动作短句、身体力学、表情、衣发响应、摄影和衔接方法，按目标选择模板；平台专用字段按本次实际入口选择。
 
 单人镜头互动、手势舞或短随拍可用[轻量模板](../assets/templates/dance-short.txt)，不强套 MV 的五段结构。[AIVideoHub_ 三条参考](external/aivideohub-dance.md)为用户提供的成片画面观察，没有作者提示词，音轨未听审；不计入上述案例库的完整提示词研读数量。
 

@@ -15,7 +15,7 @@ description: "个人专用视频创作指南。根据主题、角色或产品素
 | --- | --- | --- |
 | 想创意、选类型 | [导演设计](references/directing.md)、[类型与模板索引](references/video-types.md)；生活情景再读[生活情景方法](references/life-scenes.md) | 有区别的观看路径、事件机制与结尾；只要创意时不强行展开全文 |
 | 写完整提示词、改已有提示词 | [共用写法](references/video-core.md)、索引中对应的一个内容模板；新创作或重做镜头方案读[导演设计](references/directing.md)，按需读画风或制作方法 | 把视觉主意、表演与衔接落实为可复制的完整提示词；小范围修改保留已有设计 |
-| 写热舞、单人随拍或手势舞 | [单人舞蹈方法](references/dance-performance.md)，按目标选短版或 MV 模板 | 连贯动作、表情、衣发动态与适合表演的摄影；音乐同步有实际依据 |
+| 写舞蹈、热舞、手势舞或编舞主导的 MV | [舞蹈导演](references/dance-performance.md)，按目标选短版或 MV 模板 | 音乐乐句、动作短句、身体力学、表情与衣发、摄影和衔接整合成表演；同步有实际依据 |
 | 参考以前满意的效果 | [案例索引](references/case-index.md)，再读相关案例 | 借用有效的表演与叙事方法，另写当前故事 |
 | 借鉴外部已验证提示词 | [类型索引与代表案例](references/video-types.md)；生活情景按需读[完整提示词案例研读](references/external-cases.md) | 学习当前类型的表演、摄影、动作与状态组织，保留来源与原案例条件 |
 | 看成片、学习反馈、更新指南 | [反馈与维护](references/feedback.md)及相关案例 | 有依据的评价、必要修改，以及用户已授权范围内的记录更新 |
