@@ -1,6 +1,6 @@
 # 外部方法参考
 
-用于多素材分工、反转喜剧和逐镜复盘。两个项目的已有验证案例可以作为创作参考；本次直接研读完整提示词的记录见[案例研读](external-cases.md)。新故事的生成结果另行记录。日常使用读取本地摘要即可；需要新增案例或确认平台能力时，再检查对应原始资料或官方说明。
+用于多素材分工、反转喜剧和逐镜复盘。案例库的已有验证案例可以作为创作参考；直接研读完整提示词的记录见[案例研读](external-cases.md)。两个导演项目的创作决策已接入[导演设计](directing.md)，在新创作与镜头重写时使用。新故事的生成结果另行记录。日常使用读取本地摘要即可；需要新增案例或确认平台能力时，再检查对应原始资料或官方说明。
 
 ## 来源与用途
 
@@ -8,6 +8,8 @@
 | --- | --- | --- |
 | [ZeroLu / awesome-seedance-2.5](https://github.com/ZeroLu/awesome-seedance-2.5/blob/a24d31c3909a30b97aec83e6b48867c4482cc68e/README-zh.md) | 已研读 21 条完整提示词，研究情绪、摄影、道具和异常规则 | 保留原提示词与来源链；本次未逐条播放或重新生成视频 |
 | [LearnPrompt / awesome-seedance](https://github.com/LearnPrompt/awesome-seedance/tree/487c166e2f09487016452b90fec5e19a470af883) | 筛查案例索引，累计研读 47 条提示词记录，并参考分类与复盘流程 | 按[类型索引](video-types.md)选择写法；含两条分镜页生图稿，保留其性质 |
+| [jijiutong / AI Visual Director](https://github.com/jijiutong/ai-visual-director/tree/b47f664ca00c50539c5365109e9360f82170972d) | 已接入素材职责、调度、视线、表演停顿和跨镜状态 | 研读相关引擎、表演指导及两条文字示例；采用范围见[导演设计](directing.md#来源与适配范围) |
+| [62656456 / AI Storyboard Director v5.2](https://github.com/62656456/ai-storyboard-director-v5.2/tree/a8d9ad6362ed38d76857199cb9ba92956f87ae5d) | 已接入观看终点、视觉主意、信息显露、切镜选择及事件线衔接 | 研读精编版相关决策与全量版部分内容；按当前任务调整结构、交付和表演规则 |
 
 链接固定到本次核对的仓库版本，方便以后追溯。下面是针对个人指南整理的摘要与应用示例。外部成片和复测保留其已有验证状态；热度、验证模型与个人迁移结果分别记录。
 

@@ -7,6 +7,7 @@
 ## 能做什么
 
 - 按内容目标选择模板，设计不同的故事、展示、表演或交互流程。
+- 先确定观看终点和具体视觉主意，设计信息显露、调度、表演、切镜与跨镜状态。
 - 根据角色多角度参考绑定身份，也支持动物、产品、场景、音频与界面素材。
 - 写清表情、动作、接触、材料变化和状态反馈，使画面有具体依据。
 - 按类型安排摄影、声音、时长与镜头，生成可以直接复制使用的完整提示词。
@@ -43,6 +44,7 @@ skills/personal-video-creator/
     ├── preferences.md               个人偏好及适用范围
     ├── video-types.md               类型选择、模板与代表案例来源
     ├── video-core.md                多类型共用写法与检查标准
+    ├── directing.md                 观看目标、视觉主意与镜头决策
     ├── life-scenes.md               生活情景创作方法
     ├── feedback.md                  成片反馈与维护方法
     ├── external-methods.md          外部方法、来源与适用条件
@@ -51,7 +53,7 @@ skills/personal-video-creator/
     └── cases/                       案例说明及已有提示词
 ```
 
-从[技能入口](skills/personal-video-creator/SKILL.md)阅读，创作时只读取[共用写法](skills/personal-video-creator/references/video-core.md)及本次对应的模板。参考自己以前的作品时查看[个人案例索引](skills/personal-video-creator/references/case-index.md)。
+从[技能入口](skills/personal-video-creator/SKILL.md)阅读。新创作或重做镜头方案先使用[导演设计](skills/personal-video-creator/references/directing.md)，再结合[共用写法](skills/personal-video-creator/references/video-core.md)和本次对应的模板；小范围修改保留已有设计。参考自己以前的作品时查看[个人案例索引](skills/personal-video-creator/references/case-index.md)。
 
 ## 外部方法参考
 
@@ -62,6 +64,8 @@ skills/personal-video-creator/
 生活情景的连续情绪、构图揭晓、道具因果和日常收尾见[完整提示词案例研读](skills/personal-video-creator/references/external-cases.md)。其他类型的代表案例和分类对应见[类型索引](skills/personal-video-creator/references/video-types.md)。保留来源版本，模板提炼具体方法，完整原文通过来源查阅。
 
 外部已有验证的案例可直接按题材参考；新故事的生成结果继续单独积累。含蓄情感戏的无声停顿、猫狗双角色等当前剧情要求优先；某个外部案例的特定限制不作为通用要求。
+
+已将 [AI Visual Director](https://github.com/jijiutong/ai-visual-director/tree/b47f664ca00c50539c5365109e9360f82170972d)的素材分工、调度、视线、表演与状态方法，以及 [AI Storyboard Director v5.2](https://github.com/62656456/ai-storyboard-director-v5.2/tree/a8d9ad6362ed38d76857199cb9ba92956f87ae5d)的观看终点、视觉概念、信息显露与镜头衔接方法，落实到技能流程、[导演设计](skills/personal-video-creator/references/directing.md)和相关模板。研读范围、适配与未采用的源项目规则见该文件的来源说明。直接交付可用提示词，结构按类型选择；不要求先安装源项目或补做整套参考图。
 
 ## 安装
 
