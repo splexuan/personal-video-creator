@@ -1,3 +1,4 @@
 *.md text eol=lf
 *.yaml text eol=lf
 *.txt -text
+docs/dance-choreography-director.md -text

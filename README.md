@@ -78,7 +78,21 @@
 
 选择与分类依据见[类型与模板索引](skills/personal-video-creator/references/video-types.md)。这些支持范围用于选择创作方法；模板改编的新视频效果根据实际生成结果与用户反馈继续积累。
 
+## 舞蹈导演文档
+
+此前提供的《电影级 AI 舞蹈视频编舞导演》完整原文已加入仓库，保留其 **27 节内容与核心理念**，可以直接点击查看。
+
+| 文档 | 内容与用途 |
+| --- | --- |
+| [电影级 AI 舞蹈视频编舞导演 · 原文](docs/dance-choreography-director.md) | 完整查看角色与参考图、动作语言、身体力学、音乐乐句、动作衔接、动态对比、表情、衣发、摄影、匹配剪辑、结尾，以及原文的 I2VA / H3 转译与检查要求 |
+| [个人指南 · 舞蹈导演整合版](skills/personal-video-creator/references/dance-performance.md) | 适用于本指南的日常舞蹈创作，将导演方法与互动表演、动作密度、重音、停顿和节奏变化结合，再选择短舞或 MV 写法 |
+| [个人指南 · 舞蹈创作准备](skills/personal-video-creator/references/dance-preparation.md) | 判断有无参考图及是否需要补图，选择半身、七分身或全身，准备角色图或视频首帧，并引导继续编舞和视频提示词 |
+
+原文按附件原样保存，作为可阅读的导演资料。当前创作采用个人指南的整合方法，动作数量、表情、段落和格式按本次目标及实际生成入口选择。
+
 ## 结构
+
+`docs/` 保存导演原文；可安装的个人技能位于以下目录。
 
 ```text
 skills/personal-video-creator/
@@ -118,7 +132,7 @@ skills/personal-video-creator/
 
 已将 AI Visual Director 的素材分工、调度、视线、表演与状态方法，以及 AI Storyboard Director v5.2 的观看终点、视觉概念、信息显露与镜头衔接方法，落实到技能流程、[导演设计](skills/personal-video-creator/references/directing.md)和相关模板。研读范围、适配与未采用的源项目规则见该文件的来源说明。直接交付可用提示词，结构按类型选择；不要求先安装源项目或补做整套参考图。
 
-用户此前提供的《电影级 AI 舞蹈视频编舞导演》与参考分析提炼的互动表演方法已整合到[统一舞蹈导演](skills/personal-video-creator/references/dance-performance.md)：共同设计音乐乐句、动作短句、身体力学、过渡动量、动态对比、表情、衣发与摄影，再按短互动舞或 MV 的目标选择提示词结构。原文中的固定动作数、旋转次数、表情禁用及 H3 / I2VA 专用格式不作为所有舞蹈的默认限制。
+用户此前提供的[《电影级 AI 舞蹈视频编舞导演》原文](docs/dance-choreography-director.md)与参考分析提炼的互动表演方法已整合到[统一舞蹈导演](skills/personal-video-creator/references/dance-performance.md)：共同设计音乐乐句、动作短句、身体力学、过渡动量、动态对比、表情、衣发与摄影，再按短互动舞或 MV 的目标选择提示词结构。原文中的固定动作数、旋转次数、表情禁用及 H3 / I2VA 专用格式不作为所有舞蹈的默认限制。
 
 舞蹈的[创作准备](skills/personal-video-creator/references/dance-preparation.md)区分已有合用图、局部图与无图：需要复用身份、完整造型或首帧时建议准备图片，一次性文字创作可以直接写视频稿。半身侧重表情与上半身，七分身兼顾肩髋膝，全身看关键步法与地面；参考图景别与视频景别分别选择。需要准备图时交付[参考图提示词](skills/personal-video-creator/assets/dance-reference-image-template.txt)，用户已授权生成才执行生图，随后检查并继续编舞。
 
