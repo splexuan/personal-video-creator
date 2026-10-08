@@ -18,18 +18,65 @@
 
 产品片使用产品、展示与镜头字段；舞蹈突出音乐、编舞和同步；界面突出布局、交互和状态。生活情景的七模块仍可按需要使用，空栏目和无关要求应删除。选择方法见[共用写法](skills/personal-video-creator/references/video-core.md)。
 
-## 类型与组合
+## 支持的视频类型
 
-| 方向 | 内容模板 |
-| --- | --- |
-| 故事与记录 | 生活情景、剧情与情感、反转与荒诞喜剧、动物与萌宠、旅行与日常 Vlog |
-| 展示与表演 | 产品与品牌广告、人物分享与 UGC 测评、时装与造型展示、音乐 MV 与舞蹈 |
-| 动作与奇观 | 动作与搏斗、运动与极限挑战、车辆与驾驶、奇幻与科幻、悬疑与恐怖 |
-| 过程与交互 | 美食与 ASMR、制作与改造过程、游戏感任务与直播片段、界面动效与角色选择 |
+当前覆盖以下 **18 类内容**，支持对应的创意设计、分镜、中文视频提示词与成片复盘。共有 **19 份视频参考模板**：音乐 MV 与舞蹈提供 MV 和单人舞两种起点，其余各有一份。每类根据目标选择表演、摄影、声音和时间安排，结构、镜头数、时长与画幅均可调整。
 
-可叠加：动画与混合画风、复古 DV 与档案影像、第一人称与连续长镜头、时间冻结与倒放、分镜图驱动与分段衔接。例如“反转喜剧＋3D 动画”或“产品广告＋定格”。
+### 故事与记录：5 类
 
-选择方法与全部模板见[类型与模板索引](skills/personal-video-creator/references/video-types.md)。每类模板围绕实际需要组织素材、动作或交互、摄影与声音；结构、镜头数量和时间按本片调整。
+| 视频类型 | 适合创作的内容 | 创作重点 | 模板入口 |
+| --- | --- | --- | --- |
+| **1. 生活情景** | 家庭日常、情侣或朋友互动、室友小事件、换装互动、日常误会 | 人物关系与事件触发清楚，表情从一个状态自然变化到另一个状态；视线、手部、道具与日常动作连续，结尾完成当前事件 | [生活情景模板](skills/personal-video-creator/assets/life-scene-prompt-template.txt)、[创作方法](skills/personal-video-creator/references/life-scenes.md) |
+| **2. 剧情与情感** | 暗恋、告别、重逢、选择、关系变化，以及对白戏或无声表演 | 用对视、停顿、动作中断与回应表现心理变化；给观众理解和人物反应留时间，安排情绪转折与最后的余情 | [剧情模板](skills/personal-video-creator/assets/templates/drama.txt) |
+| **3. 反转与荒诞喜剧** | 误会、甩锅、视觉揭晓、重复失败、冷面反应、不合常理的小事件 | 决定观众与角色分别何时知道什么；铺垫、反转与反应有可见依据，笑点落在具体画面、动作或声音上 | [喜剧模板](skills/personal-video-creator/assets/templates/comedy.txt) |
+| **4. 动物与萌宠** | 猫狗互动、多宠物小故事、动物陪伴、萌宠日常与宠物喜剧 | 明确每只动物的注意力目标，写动作准备、接触与后续反应；保持数量、体型、位置和行为因果，使互动容易看懂 | [萌宠模板](skills/personal-video-creator/assets/templates/pets.txt) |
+| **5. 旅行与日常 Vlog** | 旅行自拍、朋友跟拍、城市漫步、出游记录、日常活动片段 | 明确谁持机、谁出镜，安排可通行路线、自然观察与互动；摄影变化由注意力或行动引起，保留环境声与记录感 | [Vlog 模板](skills/personal-video-creator/assets/templates/vlog.txt) |
+
+### 展示与表演：4 类
+
+| 视频类型 | 适合创作的内容 | 创作重点 | 模板入口 |
+| --- | --- | --- | --- |
+| **6. 产品与品牌广告** | 产品主视觉、香水或数码产品展示、材料质感、使用演示、品牌短片 | 产品外观与结构稳定，卖点有可见演示；用光线、材料、局部动作与镜头突出重点，安排最后的产品或品牌画面 | [广告模板](skills/personal-video-creator/assets/templates/product-commercial.txt) |
+| **7. 人物分享与 UGC 测评** | 面对镜头分享、开箱、实际使用、功能演示、体验与评价 | 口播像自然聊天，人物操作产生可见结果，先观察再回应；人脸与操作画面合理分配，功能、评价和数据依据已提供信息 | [UGC 模板](skills/personal-video-creator/assets/templates/ugc-review.txt) |
+| **8. 时装与造型展示** | Lookbook、街拍、走秀、换装、单套或多套穿搭、主题与 Cosplay 造型展示 | 看清整体廓形、材质与鞋包饰品，走步或转身带出衣料动态；同一人物跨造型保持身份，每套服装与换装位置明确 | [时装模板](skills/personal-video-creator/assets/templates/fashion.txt) |
+| **9. 音乐 MV 与舞蹈** | 音乐 MV、演唱、舞台表演、美女热舞、单人互动舞、手势舞、服装动态舞与多人编舞 | 判断参考图是否够用，按动作选半身、七分身或全身；设计乐句、动作短句、重音、留白、重心与衔接，表情、衣发和摄影共同服务表演 | [MV 模板](skills/personal-video-creator/assets/templates/music-video.txt)、[单人舞短版](skills/personal-video-creator/assets/templates/dance-short.txt) |
+
+舞蹈按任务继续细分：短随拍与镜头互动侧重连贯律动、手势、眼神和笑容；衣料动态舞侧重身体带动袖口、裙摆与发丝；编舞主导的 MV 或多人舞按实际音乐组织段落、队形与摄影；纯演唱或视觉 MV 只采用需要的表演方法。素材未定时先用[舞蹈创作准备](skills/personal-video-creator/references/dance-preparation.md)，动作与节奏设计使用[统一舞蹈导演](skills/personal-video-creator/references/dance-performance.md)。
+
+### 动作与奇观：5 类
+
+| 视频类型 | 适合创作的内容 | 创作重点 | 模板入口 |
+| --- | --- | --- | --- |
+| **10. 动作与搏斗** | 攻防、对峙、追逐、闪避、近身搏斗与战斗片段 | 写清行动意图、准备、攻击或移动路径、接触、后果与回位；重心和空间关系可信，摄影能看见关键动作与结果 | [动作模板](skills/personal-video-creator/assets/templates/action.txt) |
+| **11. 运动与极限挑战** | 跑跳、球类表现、运动技巧、闯关、跳跃与极限挑战片段 | 路线、起步、承重、腾空或关键动作、落地与完成条件明确；镜头保留重要接地过程，完成后有成绩反馈或人物反应 | [运动模板](skills/personal-video-creator/assets/templates/sports.txt) |
+| **12. 车辆与驾驶** | 汽车或摩托展示、驾驶片段、自行车骑行、道路行驶与旅程 | 车辆外形、车轮与接地连续，道路和行进方向清楚；区分车内、车外及跟拍机位，摄影运动与车辆路线相容 | [车辆模板](skills/personal-video-creator/assets/templates/vehicles.txt) |
+| **13. 奇幻与科幻** | 异能、魔法、未来科技、异世界、异常变换与视觉奇观 | 先定义能力或异常的规则、作用对象与范围，再写启动、过程、环境反馈和后果；效果发生后保留相应状态 | [奇幻科幻模板](skills/personal-video-creator/assets/templates/fantasy-scifi.txt) |
+| **14. 悬疑与恐怖** | 异常征兆、重复空间、被跟随、逐渐逼近、惊悚揭晓与悬念片段 | 控制观众可见的信息，安排异常出现、升级与角色察觉；视线、空间、环境声与最后揭晓相互配合，恐惧有具体来源 | [悬疑恐怖模板](skills/personal-video-creator/assets/templates/horror-suspense.txt) |
+
+### 过程与交互：4 类
+
+| 视频类型 | 适合创作的内容 | 创作重点 | 模板入口 |
+| --- | --- | --- | --- |
+| **15. 美食与 ASMR** | 烹饪、食物特写、品尝、切剥搅拌、材料触感与近距离声音 | 材料状态随操作改变，动作特写与实际声源对应；安排质感、过程和最后食物状态，品尝时先体验再反应 | [美食 ASMR 模板](skills/personal-video-creator/assets/templates/food-asmr.txt) |
+| **16. 制作与改造过程** | 手工、物件制作、整理、空间改造、材料加工与前后对比 | 保留对象和空间基准，按阶段展示可见变化；材料、工具与完成状态接续，延时或蒙太奇说明省略的过程 | [制作改造模板](skills/personal-video-creator/assets/templates/process-transformation.txt) |
+| **17. 游戏感任务与直播片段** | 第一或第三人称游戏任务、探索、收集物品、NPC 互动、直播式展示与主播画中画 | 目标、路线、操作和完成条件明确；物品、任务进度与 HUD 随交互变化，游戏机位和主播画面各有归属 | [游戏任务模板](skills/personal-video-creator/assets/templates/gameplay.txt) |
+| **18. 界面动效与角色选择** | 页面滚动、按钮与卡片响应、产品界面演示、角色选择、模型展示与局部动效 | 固定布局和准确文案，写清悬停、点击或滚动触发什么响应；选中项、模型与页面状态对应，最后停在明确界面状态 | [界面动效模板](skills/personal-video-creator/assets/templates/interface-motion.txt) |
+
+## 可组合的画风与制作方法
+
+以下 **5 组补充方法**可叠加到上述内容类型，按本片需要选择。动画、复古质感、第一人称和时间特效可以与不同题材组合；分镜驱动用于已有图板或需要分段衔接的制作方式。
+
+| 补充方法 | 支持的表现方式 | 设计重点 | 入口 |
+| --- | --- | --- | --- |
+| **动画与混合画风** | 2D 动画、3D 动画、定格、贴纸或纸片运动、真人与动画混合 | 明确各层画风、比例、材质与光影，指定连续运动或分步运动，以及允许夸张形变的主体 | [动画补充](skills/personal-video-creator/assets/modifiers/animation.txt) |
+| **复古 DV 与档案影像** | 家庭录像、DV 随拍、胶片记录、指定年代的档案影像质感 | 统一年代、介质、服装和物件，画质与录音质感符合记录方式，摄影保留可辨认事件 | [复古影像补充](skills/personal-video-creator/assets/modifiers/retro-footage.txt) |
+| **第一人称与连续长镜头** | POV、自拍、目击者记录、动作相机、跟随拍摄、一镜到底或局部连续段 | 明确视角主人与持机条件，设计真实可通行路线、手部占用与注意力变化，保持连续段的时间和空间 | [连续镜头补充](skills/personal-video-creator/assets/modifiers/continuous-take.txt) |
+| **时间冻结、倒放与变速** | 世界冻结、局部冻结、倒放、慢动作和指定阶段变速 | 明确作用对象、起止时点、例外主体和声音处理，恢复或倒回后沿用正确状态 | [时间特效补充](skills/personal-video-creator/assets/modifiers/time-effects.txt) |
+| **分镜图驱动与分段衔接** | 分镜图转视频、首尾图控制、多个片段接续与后期拼接 | 分配身份图、分镜图与首尾图职责，重建每格完整画面，写清前段末态、后段起态与实际衔接方式 | [分镜驱动补充](skills/personal-video-creator/assets/modifiers/storyboard-driven.txt) |
+
+组合时先确定主要内容目标，再加入需要的表现方法。例如：宠物喜剧＋3D 动画、产品广告＋定格、旅行 Vlog＋复古 DV、追逐片段＋第一人称长镜头、奇幻短片＋时间冻结。混合内容也可以互相借用方法，如车辆广告以产品展示为主，补充道路、车辆和驾驶连续性。
+
+选择与分类依据见[类型与模板索引](skills/personal-video-creator/references/video-types.md)。这些支持范围用于选择创作方法；模板改编的新视频效果根据实际生成结果与用户反馈继续积累。
 
 ## 结构
 
