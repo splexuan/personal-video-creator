@@ -1,6 +1,6 @@
 # 个人视频创作指南
 
-用于把主题、角色或产品参考、音频和已有脚本写成细致的即梦 / Seedance 中文视频提示词，并根据实际成片反馈积累个人方法。生活情景是其中一种内容类型；目前覆盖 18 类内容，提供 19 份参考模板（含单人舞短版）和 5 组可组合的画风、制作方法。
+用于把主题、角色或产品参考、音频和已有脚本写成细致的即梦 / Seedance 中文视频提示词，并根据实际成片反馈积累个人方法。生活情景是其中一种内容类型；目前覆盖 18 类内容，提供 19 份视频参考模板（含单人舞短版）、一份舞蹈参考图提示词起点和 5 组可组合的画风、制作方法。
 
 技能调用名：`$personal-video-creator`。
 
@@ -11,6 +11,7 @@
 - 根据角色多角度参考绑定身份，也支持动物、产品、场景、音频与界面素材。
 - 写清表情、动作、接触、材料变化和状态反馈，使画面有具体依据。
 - 按类型安排摄影、声音、时长与镜头，生成可以直接复制使用的完整提示词。
+- 舞蹈创作按有无参考图引导准备素材，按动作选择半身、七分身或全身，安排动作密度、重音、留白与衔接；素材足够时直接写稿。
 - 评价成片并保留实际最终提示词，区分用户认可、直接观察与待确认信息。
 
 提示词结构按内容目标、素材和实际生成入口选择。分类模板提供可调整的参考写法，允许增删、合并、改名与重排；短片也可以用清楚的连续描述或时间线。模块数量不作为质量标准。
@@ -38,6 +39,7 @@ skills/personal-video-creator/
 ├── agents/openai.yaml               显示名称与调用提示
 ├── assets/
 │   ├── life-scene-prompt-template.txt 生活情景参考写法
+│   ├── dance-reference-image-template.txt 舞蹈角色图或首帧提示词起点
 │   ├── templates/                  其他内容模板及单人舞短版
 │   └── modifiers/                  5 组画风与制作方法补充写法
 └── references/
@@ -46,7 +48,8 @@ skills/personal-video-creator/
     ├── video-core.md                多类型共用写法与检查标准
     ├── directing.md                 观看目标、视觉主意与镜头决策
     ├── life-scenes.md               生活情景创作方法
-    ├── dance-performance.md         舞蹈导演：音乐、编舞、力学、表情与摄影
+    ├── dance-preparation.md         参考图分支、取景选择与创作推进
+    ├── dance-performance.md         舞蹈导演：节奏、编舞、力学、表情与摄影
     ├── feedback.md                  成片反馈与维护方法
     ├── external-methods.md          外部方法、来源与适用条件
     ├── external-cases.md            提示词研读提炼的方法
@@ -70,6 +73,10 @@ skills/personal-video-creator/
 
 用户此前提供的《电影级 AI 舞蹈视频编舞导演》与参考分析提炼的互动表演方法已整合到[统一舞蹈导演](skills/personal-video-creator/references/dance-performance.md)：共同设计音乐乐句、动作短句、身体力学、过渡动量、动态对比、表情、衣发与摄影，再按短互动舞或 MV 的目标选择提示词结构。原文中的固定动作数、旋转次数、表情禁用及 H3 / I2VA 专用格式不作为所有舞蹈的默认限制。
 
+舞蹈的[创作准备](skills/personal-video-creator/references/dance-preparation.md)区分已有合用图、局部图与无图：需要复用身份、完整造型或首帧时建议准备图片，一次性文字创作可以直接写视频稿。半身侧重表情与上半身，七分身兼顾肩髋膝，全身看关键步法与地面；参考图景别与视频景别分别选择。需要准备图时交付[参考图提示词](skills/personal-video-creator/assets/dance-reference-image-template.txt)，用户已授权生成才执行生图，随后检查并继续编舞。
+
+编舞节奏区分音乐脉冲、动作速度、动作密度和能量，设计重音、延长、短停、回收与变奏。已有音频按实际听审安排，无音频先给可调整的节奏设计；不把快音乐等同于大量动作，也不把八拍当固定秒数。MV 时间线按实际段落展开，不预设五段结构。
+
 ## 安装
 
 本仓库包含一个技能，目录为 `skills/personal-video-creator`。下载或克隆仓库后，把该目录整体放到个人 Codex 技能目录中；设置了 `CODEX_HOME` 时使用其 `skills` 子目录，否则使用用户主目录下的 `.codex/skills`。
@@ -87,6 +94,8 @@ skills/personal-video-creator/
 > 用 $personal-video-creator，按这张角色图和上传的音频片段，写一条舞蹈 MV。先依据实际音频分配表演段落，再细化动作与摄影。
 
 > 用 $personal-video-creator，按这张成年角色图写一条单人互动舞。固定机位，动作连贯，眼神和笑容自然，服装随动作响应；音乐尚未提供时先写可调整的表演段落。
+
+> 用 $personal-video-creator，我还没有角色图，想做一条轻松互动舞。先推荐适合的角色造型、半身/七分身/全身取景，并给参考图提示词和下一步编舞方向。
 
 短随拍和手势舞使用[单人舞短版](skills/personal-video-creator/assets/templates/dance-short.txt)，音乐表演可用 MV 模板；两者都依据[统一舞蹈导演](skills/personal-video-creator/references/dance-performance.md)，无需填满五个段落或增加无关剧情。
 
