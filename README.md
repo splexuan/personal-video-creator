@@ -1,6 +1,6 @@
 # 个人视频创作指南
 
-用于把主题、角色或产品参考、音频和已有脚本写成细致的即梦 / Seedance 中文视频提示词，并根据实际成片反馈积累个人方法。生活情景是其中一种内容类型；目前包含 18 类内容模板和 5 组可组合的画风、制作方法。
+用于把主题、角色或产品参考、音频和已有脚本写成细致的即梦 / Seedance 中文视频提示词，并根据实际成片反馈积累个人方法。生活情景是其中一种内容类型；目前覆盖 18 类内容，提供 19 份参考模板（含单人舞短版）和 5 组可组合的画风、制作方法。
 
 技能调用名：`$personal-video-creator`。
 
@@ -38,7 +38,7 @@ skills/personal-video-creator/
 ├── agents/openai.yaml               显示名称与调用提示
 ├── assets/
 │   ├── life-scene-prompt-template.txt 生活情景参考写法
-│   ├── templates/                  17 类其他内容模板
+│   ├── templates/                  其他内容模板及单人舞短版
 │   └── modifiers/                  5 组画风与制作方法补充写法
 └── references/
     ├── preferences.md               个人偏好及适用范围
@@ -46,6 +46,7 @@ skills/personal-video-creator/
     ├── video-core.md                多类型共用写法与检查标准
     ├── directing.md                 观看目标、视觉主意与镜头决策
     ├── life-scenes.md               生活情景创作方法
+    ├── dance-performance.md         单人舞动作、表情、衣发与摄影方法
     ├── feedback.md                  成片反馈与维护方法
     ├── external-methods.md          外部方法、来源与适用条件
     ├── external-cases.md            完整提示词案例研读与具体迁移写法
@@ -84,6 +85,10 @@ skills/personal-video-creator/
 
 > 用 $personal-video-creator，按这张角色图和上传的音频片段，写一条舞蹈 MV。先依据实际音频分配表演段落，再细化动作与摄影。
 
+> 用 $personal-video-creator，按这张成年角色图写一条单人互动舞。固定机位，动作连贯，眼神和笑容自然，服装随动作响应；音乐尚未提供时先写可调整的表演段落。
+
+短随拍和手势舞使用[单人舞短版](skills/personal-video-creator/assets/templates/dance-short.txt)及[舞蹈方法](skills/personal-video-creator/references/dance-performance.md)，无需填满 MV 的五个段落或增加无关剧情。
+
 也可要求“给几个机制不同的创意”“按个人视频指南修改节奏”，或提供实际成片和最终提示词进行复盘。已有分镜图时可以使用分镜驱动方法；通常创作不要求先制作图板。
 
 中文、即梦 / Seedance 是当前常用偏好。9:16、电影感写实常用于生活情景，其他类型按内容选择画幅和风格。本次用户要求可以覆盖；第一人称、时长、镜头数、音乐和结尾不固定。
@@ -97,6 +102,8 @@ skills/personal-video-creator/
 | 狗打的 | 待用户确认；保留现存十秒稿和画面复盘，实际提交稿对应关系未确认 |
 
 另收录用户提供的外部参考[悬浮沙发](skills/personal-video-creator/references/external/floating-sofa.md)，作者标识 techhalla。保留[参考图原稿](skills/personal-video-creator/references/external/floating-sofa-still.txt)及[视频原稿](skills/personal-video-creator/references/external/floating-sofa-video.txt)，并记录约三十秒、3:4 成片的抽帧观察。猫触碰连接处、系索松脱、沙发远离的关键因果已核对；声音及逐帧连续性未核对。其目击者关注路径、可见限制和小动作引发大后果的方法已接到喜剧与连续长镜头模板，时长及结构按新片调整。
+
+用户挑选的[AIVideoHub_ 三条单人舞参考](skills/personal-video-creator/references/external/aivideohub-dance.md)已整理为日常互动、宽袖动态与紧凑手势的画面观察。三条时长约 14.26、21.92 和 7.69 秒；没有作者原提示词，声音未听审，不推断生成工具或卡点效果。方法接入单人舞短版，便于按不同动作语言和观看重点创作；发布账号不自动认定为原始作者。
 
 ## 持续维护
 
