@@ -29,6 +29,7 @@ skills/personal-video-creator/
     ├── life-scenes.md               生活情景创作方法
     ├── feedback.md                  成片反馈与维护方法
     ├── external-methods.md          外部方法、来源与适用条件
+    ├── external-cases.md            完整提示词案例研读与具体迁移写法
     ├── case-index.md                案例状态与资料索引
     └── cases/                       案例说明及已有提示词
 ```
@@ -37,9 +38,11 @@ skills/personal-video-creator/
 
 ## 外部方法参考
 
-已从 [ZeroLu 的社区案例库](https://github.com/ZeroLu/awesome-seedance-2.5)及 [LearnPrompt 的分类方法库](https://github.com/LearnPrompt/awesome-seedance)整理可选参考，主要用于素材分工、喜剧笑点时间安排和逐镜复盘。详见[来源与适用条件](skills/personal-video-creator/references/external-methods.md)，链接保留本次核对的源版本。
+已从 [ZeroLu 的社区案例库](https://github.com/ZeroLu/awesome-seedance-2.5)及 [LearnPrompt 的案例与方法库](https://github.com/LearnPrompt/awesome-seedance)整理参考，主要用于素材分工、喜剧笑点时间安排和逐镜复盘。详见[来源与适用条件](skills/personal-video-creator/references/external-methods.md)，链接保留本次核对的源版本。
 
-这些方法的个人迁移效果仍待成片验证。含蓄情感戏的无声停顿、猫狗双角色等当前剧情要求继续优先；不把某个外部模板的特定限制当作通用要求。
+已逐条研读 ZeroLu 的 21 条完整提示词，并从 LearnPrompt 的 795 条记录中选读 26 条相关案例，提炼连续情绪、构图揭晓、道具因果、宠物注意力、日常收尾、异常规则与分段衔接。详见[完整提示词案例研读](skills/personal-video-creator/references/external-cases.md)。
+
+外部已有验证的案例可直接按题材参考；新故事的生成结果继续单独积累。含蓄情感戏的无声停顿、猫狗双角色等当前剧情要求优先；某个外部案例的特定限制不作为通用要求。
 
 ## 安装
 
