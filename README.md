@@ -28,11 +28,18 @@ skills/personal-video-creator/
     ├── preferences.md               个人偏好及适用范围
     ├── life-scenes.md               生活情景创作方法
     ├── feedback.md                  成片反馈与维护方法
+    ├── external-methods.md          外部方法、来源与适用条件
     ├── case-index.md                案例状态与资料索引
     └── cases/                       案例说明及已有提示词
 ```
 
 从[技能入口](skills/personal-video-creator/SKILL.md)阅读，或直接查看[提示词模板](skills/personal-video-creator/assets/life-scene-prompt-template.txt)与[案例索引](skills/personal-video-creator/references/case-index.md)。
+
+## 外部方法参考
+
+已从 [ZeroLu 的社区案例库](https://github.com/ZeroLu/awesome-seedance-2.5)及 [LearnPrompt 的分类方法库](https://github.com/LearnPrompt/awesome-seedance)整理可选参考，主要用于素材分工、喜剧笑点时间安排和逐镜复盘。详见[来源与适用条件](skills/personal-video-creator/references/external-methods.md)，链接保留本次核对的源版本。
+
+这些方法的个人迁移效果仍待成片验证。含蓄情感戏的无声停顿、猫狗双角色等当前剧情要求继续优先；不把某个外部模板的特定限制当作通用要求。
 
 ## 安装
 
