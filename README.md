@@ -28,7 +28,7 @@
 
 可叠加：动画与混合画风、复古 DV 与档案影像、第一人称与连续长镜头、时间冻结与倒放、分镜图驱动与分段衔接。例如“反转喜剧＋3D 动画”或“产品广告＋定格”。
 
-选择方法、全部模板及代表案例见[类型与模板索引](skills/personal-video-creator/references/video-types.md)。每类模板围绕实际需要组织素材、动作或交互、摄影与声音；结构、镜头数量和时间按本片调整。
+选择方法与全部模板见[类型与模板索引](skills/personal-video-creator/references/video-types.md)。每类模板围绕实际需要组织素材、动作或交互、摄影与声音；结构、镜头数量和时间按本片调整。
 
 ## 结构
 
@@ -42,34 +42,33 @@ skills/personal-video-creator/
 │   └── modifiers/                  5 组画风与制作方法补充写法
 └── references/
     ├── preferences.md               个人偏好及适用范围
-    ├── video-types.md               类型选择、模板与代表案例来源
+    ├── video-types.md               类型选择、模板与方法入口
     ├── video-core.md                多类型共用写法与检查标准
     ├── directing.md                 观看目标、视觉主意与镜头决策
     ├── life-scenes.md               生活情景创作方法
     ├── dance-performance.md         舞蹈导演：音乐、编舞、力学、表情与摄影
     ├── feedback.md                  成片反馈与维护方法
     ├── external-methods.md          外部方法、来源与适用条件
-    ├── external-cases.md            完整提示词案例研读与具体迁移写法
+    ├── external-cases.md            提示词研读提炼的方法
     ├── case-index.md                案例状态与资料索引
-    ├── cases/                       个人案例说明及已有提示词
-    └── external/                    用户提供的外部案例、原文与画面观察
+    └── cases/                       个人案例说明及已有提示词
 ```
 
 从[技能入口](skills/personal-video-creator/SKILL.md)阅读。新创作或重做镜头方案先使用[导演设计](skills/personal-video-creator/references/directing.md)，再结合[共用写法](skills/personal-video-creator/references/video-core.md)和本次对应的模板；小范围修改保留已有设计。参考自己以前的作品时查看[个人案例索引](skills/personal-video-creator/references/case-index.md)。
 
 ## 外部方法参考
 
-已从 [ZeroLu 的社区案例库](https://github.com/ZeroLu/awesome-seedance-2.5)及 [LearnPrompt 的案例与方法库](https://github.com/LearnPrompt/awesome-seedance)整理参考，主要用于素材分工、喜剧笑点时间安排和逐镜复盘。详见[来源与适用条件](skills/personal-video-creator/references/external-methods.md)，链接保留本次核对的源版本。
+已从 ZeroLu 的社区案例库及 LearnPrompt 的案例与方法库整理参考，主要用于素材分工、喜剧笑点时间安排和逐镜复盘。详见[来源与适用条件](skills/personal-video-creator/references/external-methods.md)，仅保留必要的文字方法来源，不写入外部网址。
 
 已逐条研读 ZeroLu 的 21 条完整记录，并从 LearnPrompt 的 795 条记录中累计选读 47 条，覆盖其快照的 27 种分类。47 条中含两条分镜页生图稿，已与视频提示词区分；本次没有逐条播放或重新生成外部视频。
 
-生活情景的连续情绪、构图揭晓、道具因果和日常收尾见[完整提示词案例研读](skills/personal-video-creator/references/external-cases.md)。其他类型的代表案例和分类对应见[类型索引](skills/personal-video-creator/references/video-types.md)。保留来源版本，模板提炼具体方法，完整原文通过来源查阅。
+生活情景的连续情绪、构图揭晓、道具因果和日常收尾见[提示词研读方法](skills/personal-video-creator/references/external-cases.md)。其他类型的模板与分类对应见[类型索引](skills/personal-video-creator/references/video-types.md)。模板保留具体方法，外部样片仅供分析，不收录样片资料或网址。
 
 外部已有验证的案例可直接按题材参考；新故事的生成结果继续单独积累。含蓄情感戏的无声停顿、猫狗双角色等当前剧情要求优先；某个外部案例的特定限制不作为通用要求。
 
-已将 [AI Visual Director](https://github.com/jijiutong/ai-visual-director/tree/b47f664ca00c50539c5365109e9360f82170972d)的素材分工、调度、视线、表演与状态方法，以及 [AI Storyboard Director v5.2](https://github.com/62656456/ai-storyboard-director-v5.2/tree/a8d9ad6362ed38d76857199cb9ba92956f87ae5d)的观看终点、视觉概念、信息显露与镜头衔接方法，落实到技能流程、[导演设计](skills/personal-video-creator/references/directing.md)和相关模板。研读范围、适配与未采用的源项目规则见该文件的来源说明。直接交付可用提示词，结构按类型选择；不要求先安装源项目或补做整套参考图。
+已将 AI Visual Director 的素材分工、调度、视线、表演与状态方法，以及 AI Storyboard Director v5.2 的观看终点、视觉概念、信息显露与镜头衔接方法，落实到技能流程、[导演设计](skills/personal-video-creator/references/directing.md)和相关模板。研读范围、适配与未采用的源项目规则见该文件的来源说明。直接交付可用提示词，结构按类型选择；不要求先安装源项目或补做整套参考图。
 
-用户此前提供的《电影级 AI 舞蹈视频编舞导演》与 AIVideoHub_ 样片经验已整合到[统一舞蹈导演](skills/personal-video-creator/references/dance-performance.md)：共同设计音乐乐句、动作短句、身体力学、过渡动量、动态对比、表情、衣发与摄影，再按短互动舞或 MV 的目标选择提示词结构。原文中的固定动作数、旋转次数、表情禁用及 H3 / I2VA 专用格式不作为所有舞蹈的默认限制。
+用户此前提供的《电影级 AI 舞蹈视频编舞导演》与参考分析提炼的互动表演方法已整合到[统一舞蹈导演](skills/personal-video-creator/references/dance-performance.md)：共同设计音乐乐句、动作短句、身体力学、过渡动量、动态对比、表情、衣发与摄影，再按短互动舞或 MV 的目标选择提示词结构。原文中的固定动作数、旋转次数、表情禁用及 H3 / I2VA 专用格式不作为所有舞蹈的默认限制。
 
 ## 安装
 
@@ -103,14 +102,10 @@ skills/personal-video-creator/
 | 明天 | 用户整体正面反馈；保留最终提示词，已核对关键画面并记录连续反应与结尾动作；声音未完成听审 |
 | 狗打的 | 待用户确认；保留现存十秒稿和画面复盘，实际提交稿对应关系未确认 |
 
-另收录用户提供的外部参考[悬浮沙发](skills/personal-video-creator/references/external/floating-sofa.md)，作者标识 techhalla。保留[参考图原稿](skills/personal-video-creator/references/external/floating-sofa-still.txt)及[视频原稿](skills/personal-video-creator/references/external/floating-sofa-video.txt)，并记录约三十秒、3:4 成片的抽帧观察。猫触碰连接处、系索松脱、沙发远离的关键因果已核对；声音及逐帧连续性未核对。其目击者关注路径、可见限制和小动作引发大后果的方法已接到喜剧与连续长镜头模板，时长及结构按新片调整。
-
-用户挑选的[AIVideoHub_ 三条单人舞参考](skills/personal-video-creator/references/external/aivideohub-dance.md)已整理为日常互动、宽袖动态与紧凑手势的画面观察。三条时长约 14.26、21.92 和 7.69 秒；没有作者原提示词，声音未听审，不推断生成工具或卡点效果。方法接入单人舞短版，便于按不同动作语言和观看重点创作；发布账号不自动认定为原始作者。
-
 ## 持续维护
 
 满意成片用于学习时，保留实际使用的最终提示词原文，并记录认可的是总体效果还是具体细节。案例经验先放案例说明，明确长期偏好进入偏好文件，可推广的方法进入创作方法文件。
 
 本机已安装技能的后续修改需要同步到本仓库后再提交。新类别有实际请求和具体案例方法时再扩展；外部案例支持的模板与个人成片已验证的方法分开记录。
 
-本仓库提交技能文本和示例提示词，不包含角色原图、生成视频、凭据或临时依赖。
+本仓库提交创作方法、模板与个人最终提示词；外部样片仅供参考分析，不写入样片资料、账号、视频文件名、视频地址或网址。
