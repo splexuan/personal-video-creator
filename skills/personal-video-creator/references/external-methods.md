@@ -7,7 +7,7 @@
 | 来源 | 当前用途 | 采用范围 |
 | --- | --- | --- |
 | [ZeroLu / awesome-seedance-2.5](https://github.com/ZeroLu/awesome-seedance-2.5/blob/a24d31c3909a30b97aec83e6b48867c4482cc68e/README-zh.md) | 已研读 21 条完整提示词，研究情绪、摄影、道具和异常规则 | 保留原提示词与来源链；本次未逐条播放或重新生成视频 |
-| [LearnPrompt / awesome-seedance](https://github.com/LearnPrompt/awesome-seedance/tree/487c166e2f09487016452b90fec5e19a470af883) | 筛查案例索引，研读 26 条相关提示词，并参考分类与复盘流程 | 采用与个人用途相符的具体写法；不整套安装其他技能或搬入全部案例 |
+| [LearnPrompt / awesome-seedance](https://github.com/LearnPrompt/awesome-seedance/tree/487c166e2f09487016452b90fec5e19a470af883) | 筛查案例索引，累计研读 47 条提示词记录，并参考分类与复盘流程 | 按[类型索引](video-types.md)选择写法；含两条分镜页生图稿，保留其性质 |
 
 链接固定到本次核对的仓库版本，方便以后追溯。下面是针对个人指南整理的摘要与应用示例。外部成片和复测保留其已有验证状态；热度、验证模型与个人迁移结果分别记录。
 

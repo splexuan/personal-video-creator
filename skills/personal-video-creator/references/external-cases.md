@@ -6,6 +6,8 @@
 
 整理日期：2026-10-08。
 
+本页保存首次生活情景相关的研读范围。其他类型后续补读的案例、分类模板与方法见[多类型索引](video-types.md)。
+
 - [ZeroLu 案例数据](https://github.com/ZeroLu/awesome-seedance-2.5/blob/a24d31c3909a30b97aec83e6b48867c4482cc68e/data/community-x-seedance-cases.json)：已逐条读取 21 条记录的完整提示词及来源信息，全部标记为 complete。x-sd25-14 与 x-sd25-15 的提示词相同，属于同一写法，不能当作两种独立方法。
 - [LearnPrompt 案例数据](https://github.com/LearnPrompt/awesome-seedance/blob/487c166e2f09487016452b90fec5e19a470af883/data/cases.json)：已筛查 795 条记录的索引信息，读取其中 26 条与情绪、生活喜剧、宠物互动、日常摄影有关的 promptFull 文本及来源、复测信息，未逐条研读其余长稿。
 
