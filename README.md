@@ -50,7 +50,8 @@ skills/personal-video-creator/
     ├── external-methods.md          外部方法、来源与适用条件
     ├── external-cases.md            完整提示词案例研读与具体迁移写法
     ├── case-index.md                案例状态与资料索引
-    └── cases/                       案例说明及已有提示词
+    ├── cases/                       个人案例说明及已有提示词
+    └── external/                    用户提供的外部案例、原文与画面观察
 ```
 
 从[技能入口](skills/personal-video-creator/SKILL.md)阅读。新创作或重做镜头方案先使用[导演设计](skills/personal-video-creator/references/directing.md)，再结合[共用写法](skills/personal-video-creator/references/video-core.md)和本次对应的模板；小范围修改保留已有设计。参考自己以前的作品时查看[个人案例索引](skills/personal-video-creator/references/case-index.md)。
@@ -94,6 +95,8 @@ skills/personal-video-creator/
 | 女仆装攻防战 | 用户认可情绪与表情；保存方法摘要，未标为逐字最终稿或直接看片结论 |
 | 明天 | 用户整体正面反馈；保留最终提示词，已核对关键画面并记录连续反应与结尾动作；声音未完成听审 |
 | 狗打的 | 待用户确认；保留现存十秒稿和画面复盘，实际提交稿对应关系未确认 |
+
+另收录用户提供的外部参考[悬浮沙发](skills/personal-video-creator/references/external/floating-sofa.md)，作者标识 techhalla。保留[参考图原稿](skills/personal-video-creator/references/external/floating-sofa-still.txt)及[视频原稿](skills/personal-video-creator/references/external/floating-sofa-video.txt)，并记录约三十秒、3:4 成片的抽帧观察。猫触碰连接处、系索松脱、沙发远离的关键因果已核对；声音及逐帧连续性未核对。其目击者关注路径、可见限制和小动作引发大后果的方法已接到喜剧与连续长镜头模板，时长及结构按新片调整。
 
 ## 持续维护
 

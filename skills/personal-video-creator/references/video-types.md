@@ -16,7 +16,7 @@
 | --- | --- | --- | --- | --- |
 | 生活情景 | 家庭日常、互动与小事件 | 情绪因果、关系与日常动作 | [生活情景](../assets/life-scene-prompt-template.txt)、[创作方法](life-scenes.md) | [明天与已有案例](case-index.md) |
 | 剧情与情感 | 告别、选择、关系变化、对白与无声表演 | 触发、理解、选择、回应和余情 | [填写模板](../assets/templates/drama.txt) | [出租车分手戏：仿真人微表情连续情绪演变视频（Seedance 2.5）](https://goodcase.ai/cases/seedance-2-5-8d136b59e95a) |
-| 反转与荒诞喜剧 | 视觉揭晓、误会、重复失败、冷面反应 | 信息差、可见反转和反应时间 | [填写模板](../assets/templates/comedy.txt) | [Water Walking Xianxia Fraud](https://goodcase.ai/cases/water-walking-xianxia-fraud) |
+| 反转与荒诞喜剧 | 视觉揭晓、误会、重复失败、冷面反应 | 信息差、可见反转和反应时间 | [填写模板](../assets/templates/comedy.txt) | [Water Walking Xianxia Fraud](https://goodcase.ai/cases/water-walking-xianxia-fraud)、[悬浮沙发的目击者记录](external/floating-sofa.md) |
 | 动物与萌宠 | 宠物互动、动物小故事与陪伴 | 注意力目标、动作准备和接触后的反应 | [填写模板](../assets/templates/pets.txt) | [雨天自拍中抢发圈扑镜头的小猫](https://goodcase.ai/cases/seedance-she-thought-it-was-going-to-be-a-peaceful-rainy-day-selfie-f0bf765977dd) |
 | 旅行与日常 Vlog | 自拍、朋友跟拍、旅行记录和日常片段 | 持机者、路线、自然互动与记录终点 | [填写模板](../assets/templates/vlog.txt) | [首尔夏夜 Vlog](https://goodcase.ai/cases/vlog-c8171f712492) |
 | 产品与品牌广告 | 产品主视觉、质感、使用体验与品牌展示 | 产品识别、可见卖点、演示和定版 | [填写模板](../assets/templates/product-commercial.txt) | [Seedance 2.0 可乐商业广告视频](https://goodcase.ai/cases/seedance-2-0-181cb461432f) |
@@ -39,7 +39,7 @@
 | --- | --- | --- | --- |
 | 动画与混合画风 | 2D、3D、定格及真人与贴纸混合 | [补充写法](../assets/modifiers/animation.txt) | [吉卜力风格森林烹饪动画](https://goodcase.ai/cases/case-a45446378e2a)、[Stylized 3D Animation: Old Man and Pigeon](https://goodcase.ai/cases/stylized-3d-animation-old-man-and-pigeon)、[潮池石头人的笨拙舞蹈](https://goodcase.ai/cases/seedance-create-a-21-second-vertical-9-16-cinematic-stop-motion-animation-557fa2797476) |
 | 复古 DV 与档案影像 | 家庭录像、DV、胶片纪录和旧影像感 | [补充写法](../assets/modifiers/retro-footage.txt) | [首尔夏夜 Vlog](https://goodcase.ai/cases/vlog-c8171f712492) |
-| 第一人称与连续长镜头 | POV、自拍、跟随与一镜到底 | [补充写法](../assets/modifiers/continuous-take.txt) | [Seedance 2.5 生成 GoPro 钓鱼到烤鱼全流程](https://goodcase.ai/cases/seedance-2-5-gopro-94a73eef1dbf) |
+| 第一人称与连续长镜头 | POV、自拍、跟随、目击者记录与一镜到底 | [补充写法](../assets/modifiers/continuous-take.txt) | [Seedance 2.5 生成 GoPro 钓鱼到烤鱼全流程](https://goodcase.ai/cases/seedance-2-5-gopro-94a73eef1dbf)、[悬浮沙发](external/floating-sofa.md) |
 | 时间冻结、倒放与变速 | 视觉异常、时序喜剧与时间特效 | [补充写法](../assets/modifiers/time-effects.txt) | [复古餐厅时间冻结与倒放](https://goodcase.ai/cases/seedance-25-diner-frozen-time-rewind)、[过山车假发闹剧：冻结与倒放的第二次演练](https://goodcase.ai/cases/youmind-rollercoaster-wig-time-freeze) |
 | 分镜图驱动与分段衔接 | 已有分镜图、首尾图或需分段的长片 | [补充写法](../assets/modifiers/storyboard-driven.txt) | [3D 烘焙动画序列](https://goodcase.ai/cases/3d-f194855e4246)、[Seedance 2.5 双 prompt 拼接三十秒叙事短片](https://goodcase.ai/cases/youralphamom-seedance-ai-9afbf3248f50) |
 
