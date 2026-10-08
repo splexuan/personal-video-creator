@@ -1,0 +1,4 @@
+interface:
+  display_name: "个人视频创作指南"
+  short_description: "个人专用生活情景视频创意、细致分镜提示词与成片反馈学习"
+  default_prompt: "使用 $personal-video-creator，根据我的情景和角色参考，创作细致的视频提示词，并结合成片反馈改进个人指南。"
