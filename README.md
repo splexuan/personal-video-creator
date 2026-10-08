@@ -11,7 +11,7 @@
 - 根据角色多角度参考绑定身份，也支持动物、产品、场景、音频与界面素材。
 - 写清表情、动作、接触、材料变化和状态反馈，使画面有具体依据。
 - 按类型安排摄影、声音、时长与镜头，生成可以直接复制使用的完整提示词。
-- 舞蹈创作按有无参考图引导准备素材，按动作选择半身、七分身或全身，安排动作密度、重音、留白与衔接；素材足够时直接写稿。
+- 舞蹈由 AI 设计完整表演，安排可记住的主动作、段落发展与对比、节奏、高光和结尾；按有无参考图引导准备素材，按动作选择取景，素材足够时直接写稿。
 - 评价成片并保留实际最终提示词，区分用户认可、直接观察与待确认信息。
 
 提示词结构按内容目标、素材和实际生成入口选择。分类模板提供可调整的参考写法，允许增删、合并、改名与重排；短片也可以用清楚的连续描述或时间线。模块数量不作为质量标准。
@@ -39,7 +39,7 @@
 | **6. 产品与品牌广告** | 产品主视觉、香水或数码产品展示、材料质感、使用演示、品牌短片 | 产品外观与结构稳定，卖点有可见演示；用光线、材料、局部动作与镜头突出重点，安排最后的产品或品牌画面 | [广告模板](skills/personal-video-creator/assets/templates/product-commercial.txt) |
 | **7. 人物分享与 UGC 测评** | 面对镜头分享、开箱、实际使用、功能演示、体验与评价 | 口播像自然聊天，人物操作产生可见结果，先观察再回应；人脸与操作画面合理分配，功能、评价和数据依据已提供信息 | [UGC 模板](skills/personal-video-creator/assets/templates/ugc-review.txt) |
 | **8. 时装与造型展示** | Lookbook、街拍、走秀、换装、单套或多套穿搭、主题与 Cosplay 造型展示 | 看清整体廓形、材质与鞋包饰品，走步或转身带出衣料动态；同一人物跨造型保持身份，每套服装与换装位置明确 | [时装模板](skills/personal-video-creator/assets/templates/fashion.txt) |
-| **9. 音乐 MV 与舞蹈** | 音乐 MV、演唱、舞台表演、美女热舞、单人互动舞、手势舞、服装动态舞与多人编舞 | 判断参考图是否够用，按动作选半身、七分身或全身；设计乐句、动作短句、重音、留白、重心与衔接，表情、衣发和摄影共同服务表演 | [MV 模板](skills/personal-video-creator/assets/templates/music-video.txt)、[单人舞短版](skills/personal-video-creator/assets/templates/dance-short.txt) |
+| **9. 音乐 MV 与舞蹈** | 音乐 MV、演唱、舞台表演、美女热舞、单人互动舞、手势舞、服装动态舞与多人编舞 | 设计有记忆点、节奏、发展、对比、高光和结束关系的完整表演；按参考图与动作选取景，细化身体、表情、衣发、音乐和摄影 | [MV 模板](skills/personal-video-creator/assets/templates/music-video.txt)、[单人舞短版](skills/personal-video-creator/assets/templates/dance-short.txt) |
 
 舞蹈按任务继续细分：短随拍与镜头互动侧重连贯律动、手势、眼神和笑容；衣料动态舞侧重身体带动袖口、裙摆与发丝；编舞主导的 MV 或多人舞按实际音乐组织段落、队形与摄影；纯演唱或视觉 MV 只采用需要的表演方法。素材未定时先用[舞蹈创作准备](skills/personal-video-creator/references/dance-preparation.md)，动作与节奏设计使用[统一舞蹈导演](skills/personal-video-creator/references/dance-performance.md)。
 
@@ -85,10 +85,13 @@
 | 文档 | 内容与用途 |
 | --- | --- |
 | [电影级 AI 舞蹈视频编舞导演 · 原文](docs/dance-choreography-director.md) | 完整查看角色与参考图、动作语言、身体力学、音乐乐句、动作衔接、动态对比、表情、衣发、摄影、匹配剪辑、结尾，以及原文的 I2VA / H3 转译与检查要求 |
+| [个人指南 · 完整舞蹈编排](skills/personal-video-creator/references/dance-composition.md) | 面向短视频表演展示，由 AI 选择主句、变奏、对比与高光，组织整支舞的节奏和结束关系，检查动作同质与构图冲突 |
 | [个人指南 · 舞蹈导演整合版](skills/personal-video-creator/references/dance-performance.md) | 适用于本指南的日常舞蹈创作，将导演方法与互动表演、动作密度、重音、停顿和节奏变化结合，再选择短舞或 MV 写法 |
 | [个人指南 · 舞蹈创作准备](skills/personal-video-creator/references/dance-preparation.md) | 判断有无参考图及是否需要补图，选择半身、七分身或全身，准备角色图或视频首帧，并引导继续编舞和视频提示词 |
 
 原文按附件原样保存，作为可阅读的导演资料。当前创作采用个人指南的整合方法，动作数量、表情、段落和格式按本次目标及实际生成入口选择。
+
+完整舞蹈先设计整体观看发展，再写动作短句，最后细化身体与摄影。记忆点有具体路径、节奏和轮廓，段落区别让观众看得见，高光有真实动作变化，结尾回应前段或完成运动。柔美舞也可以有快发慢收、停点和朝向变化；结构随风格、音乐和时长选择，不固定套用一套起承转合，也不靠反复伸展填满较长时长。
 
 ## 结构
 
@@ -110,6 +113,7 @@ skills/personal-video-creator/
     ├── directing.md                 观看目标、视觉主意与镜头决策
     ├── life-scenes.md               生活情景创作方法
     ├── dance-preparation.md         参考图分支、取景选择与创作推进
+    ├── dance-composition.md         整支舞的记忆点、发展、节奏、对比与高光
     ├── dance-performance.md         舞蹈导演：节奏、编舞、力学、表情与摄影
     ├── feedback.md                  成片反馈与维护方法
     ├── external-methods.md          外部方法、来源与适用条件
@@ -137,6 +141,8 @@ skills/personal-video-creator/
 舞蹈的[创作准备](skills/personal-video-creator/references/dance-preparation.md)区分已有合用图、局部图与无图：需要复用身份、完整造型或首帧时建议准备图片，一次性文字创作可以直接写视频稿。半身侧重表情与上半身，七分身兼顾肩髋膝，全身看关键步法与地面；参考图景别与视频景别分别选择。需要准备图时交付[参考图提示词](skills/personal-video-creator/assets/dance-reference-image-template.txt)，用户已授权生成才执行生图，随后检查并继续编舞。
 
 编舞节奏区分音乐脉冲、动作速度、动作密度和能量，设计重音、延长、短停、回收与变奏。已有音频按实际听审安排，无音频先给可调整的节奏设计；不把快音乐等同于大量动作，也不把八拍当固定秒数。MV 时间线按实际段落展开，不预设五段结构。
+
+完整编排方法进一步明确主句与对比材料、整体观看发展、视觉高光和结束关系。短舞与 MV 模板已接入这些决定，先完成表演设计再细化衔接；检查时暂时去掉音乐、运镜和美学形容词，确认身体行为本身有辨识度与可见发展。
 
 ## 安装
 

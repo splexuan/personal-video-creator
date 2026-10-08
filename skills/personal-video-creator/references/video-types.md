@@ -22,7 +22,7 @@
 | 产品与品牌广告 | 产品主视觉、质感、使用体验与品牌展示 | 产品识别、可见卖点、演示和定版 | [填写模板](../assets/templates/product-commercial.txt) |
 | 人物分享与 UGC 测评 | 面对镜头分享、开箱、使用演示与体验反应 | 说话者、实际操作、观察与口语回应 | [填写模板](../assets/templates/ugc-review.txt) |
 | 时装与造型展示 | Lookbook、街拍、走秀与服装细节 | 廓形、材料、配饰与造型之间的区别 | [填写模板](../assets/templates/fashion.txt) |
-| 音乐 MV 与舞蹈 | 音频驱动编舞、演唱、节奏剪辑与单人互动舞 | 参考图准备与取景、动作节奏、表情、衣发动态与真实音乐依据 | [创作准备](dance-preparation.md)、[统一舞蹈导演](dance-performance.md)、[MV 模板](../assets/templates/music-video.txt)、[单人舞短版](../assets/templates/dance-short.txt) |
+| 音乐 MV 与舞蹈 | 音频驱动编舞、演唱、节奏剪辑与单人互动舞 | 完整表演的主句、节奏、对比、高光与结尾，参考图、取景及真实音乐依据 | [完整编排](dance-composition.md)、[创作准备](dance-preparation.md)、[统一舞蹈导演](dance-performance.md)、[MV 模板](../assets/templates/music-video.txt)、[单人舞短版](../assets/templates/dance-short.txt) |
 | 动作与搏斗 | 攻防、追逐、近身动作与战斗段落 | 攻击意图、闪避、接触、后果与回位 | [填写模板](../assets/templates/action.txt) |
 | 运动与极限挑战 | 比赛、闯关、跳跃与运动表现 | 路线、重心、完成动作与成绩后反应 | [填写模板](../assets/templates/sports.txt) |
 | 车辆与驾驶 | 汽车、摩托、骑行旅程与行驶展示 | 车辆结构、道路连续、接地与摄影来源 | [填写模板](../assets/templates/vehicles.txt) |

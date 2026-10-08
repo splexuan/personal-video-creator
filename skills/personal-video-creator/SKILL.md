@@ -15,7 +15,7 @@ description: "个人专用视频创作指南。根据主题、角色或产品素
 | --- | --- | --- |
 | 想创意、选类型 | [导演设计](references/directing.md)、[类型与模板索引](references/video-types.md)；生活情景再读[生活情景方法](references/life-scenes.md) | 有区别的观看路径、事件机制与结尾；只要创意时不强行展开全文 |
 | 写完整提示词、改已有提示词 | [共用写法](references/video-core.md)、索引中对应的一个内容模板；新创作或重做镜头方案读[导演设计](references/directing.md)，按需读画风或制作方法 | 把视觉主意、表演与衔接落实为可复制的完整提示词；小范围修改保留已有设计 |
-| 写舞蹈、热舞、手势舞或编舞主导的 MV | [舞蹈导演](references/dance-performance.md)；素材未定、补图或取景选择读[创作准备](references/dance-preparation.md)，按目标选短版或 MV 模板 | 判断有无参考图及是否需要先准备图，按动作选半身/七分身/全身；把音乐、动作密度、落点与衔接整合成表演，并引导完成下一步 |
+| 写舞蹈、热舞、手势舞或编舞主导的 MV | [舞蹈导演](references/dance-performance.md)；整支舞设计或重编读[完整编排](references/dance-composition.md)，素材与取景未定读[创作准备](references/dance-preparation.md)，按目标选短版或 MV 模板 | 由 AI 设计有记忆点、节奏、发展、高光与结束关系的完整表演，细化动作和摄影；判断是否准备参考图及其取景，并引导完成下一步 |
 | 参考以前满意的效果 | [案例索引](references/case-index.md)，再读相关案例 | 借用有效的表演与叙事方法，另写当前故事 |
 | 借鉴外部提示词或参考视频 | [类型索引](references/video-types.md)；生活情景按需读[研读方法](references/external-cases.md) | 提炼当前类型的表演、摄影、动作与状态组织；外部样片和网址不写入技能 |
 | 看成片、学习反馈、更新指南 | [反馈与维护](references/feedback.md)及相关案例 | 有依据的评价、必要修改，以及用户已授权范围内的记录更新 |
