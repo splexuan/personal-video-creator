@@ -132,16 +132,16 @@ skills/personal-video-creator/
 
 | 参考来源 | 已读范围 | 提炼与融合内容 | 方法入口 |
 | --- | --- | --- | --- |
-| ZeroLu / awesome-seedance-2.5 | 21 条完整提示词记录 | 连续情绪与表演、构图揭晓、道具因果、异常规则和日常收尾 | [提示词研读方法](skills/personal-video-creator/references/external-cases.md)、[生活情景](skills/personal-video-creator/references/life-scenes.md) |
-| LearnPrompt / awesome-seedance | 从 795 条记录快照中累计选读 47 条，含 2 条分镜页生图稿；分类映射覆盖 27 种原库分类 | 参考素材分工、喜剧笑点时间安排、类型模板与逐镜复盘；生图稿与视频稿分别处理 | [外部方法](skills/personal-video-creator/references/external-methods.md)、[类型索引](skills/personal-video-creator/references/video-types.md)、[反馈流程](skills/personal-video-creator/references/feedback.md) |
-| jijiutong / AI Visual Director | 相关引擎、表演指导及 2 条文字示例 | 素材职责、空间调度、视线、表演停顿与跨镜状态 | [导演设计](skills/personal-video-creator/references/directing.md) |
-| 62656456 / AI Storyboard Director v5.2 | 精编版相关决策与全量版部分内容 | 观看终点、视觉主意、信息显露、切镜选择和事件线衔接 | [导演设计](skills/personal-video-creator/references/directing.md) |
-| 《电影级 AI 舞蹈视频编舞导演》 | 用户提供的完整 27 节原文 | 音乐乐句、动作短句、身体力学、过渡动量、动态对比、表情、衣发与摄影；结合互动表演方法组织短舞和 MV | [原文](docs/dance-choreography-director.md)、[统一舞蹈导演](skills/personal-video-creator/references/dance-performance.md)、[完整编排](skills/personal-video-creator/references/dance-composition.md) |
-| Arvin《AI打斗的关键一击：冲击帧与闪帧提示词实战》 | 2026-10-10 阅读全文，未播放示范视频 | 将冲击帧、闪白、反相和闪黑绑定到具体事件；保留接触信息，明确恢复与动作后果，接入动作模板、自检和成片复盘 | [动作视觉重音](skills/personal-video-creator/references/impact-frames.md)、[动作模板](skills/personal-video-creator/assets/templates/action.txt)、[提示词自检](skills/personal-video-creator/references/prompt-self-check.md) |
+| [ZeroLu / awesome-seedance-2.5](https://github.com/ZeroLu/awesome-seedance-2.5) | 21 条完整提示词记录 | 连续情绪与表演、构图揭晓、道具因果、异常规则和日常收尾 | [提示词研读方法](skills/personal-video-creator/references/external-cases.md)、[生活情景](skills/personal-video-creator/references/life-scenes.md) |
+| [LearnPrompt / awesome-seedance](https://github.com/LearnPrompt/awesome-seedance) | 从 795 条记录快照中累计选读 47 条，含 2 条分镜页生图稿；分类映射覆盖 27 种原库分类 | 参考素材分工、喜剧笑点时间安排、类型模板与逐镜复盘；生图稿与视频稿分别处理 | [外部方法](skills/personal-video-creator/references/external-methods.md)、[类型索引](skills/personal-video-creator/references/video-types.md)、[反馈流程](skills/personal-video-creator/references/feedback.md) |
+| [jijiutong / AI Visual Director](https://github.com/jijiutong/ai-visual-director) | 相关引擎、表演指导及 2 条文字示例 | 素材职责、空间调度、视线、表演停顿与跨镜状态 | [导演设计](skills/personal-video-creator/references/directing.md) |
+| [62656456 / AI Storyboard Director v5.2](https://github.com/62656456/ai-storyboard-director-v5.2) | 精编版相关决策与全量版部分内容 | 观看终点、视觉主意、信息显露、切镜选择和事件线衔接 | [导演设计](skills/personal-video-creator/references/directing.md) |
+| [《电影级 AI 舞蹈视频编舞导演》](docs/dance-choreography-director.md) | 用户提供的完整 27 节原文 | 音乐乐句、动作短句、身体力学、过渡动量、动态对比、表情、衣发与摄影；结合互动表演方法组织短舞和 MV | [原文](docs/dance-choreography-director.md)、[统一舞蹈导演](skills/personal-video-creator/references/dance-performance.md)、[完整编排](skills/personal-video-creator/references/dance-composition.md) |
+| [Arvin《AI打斗的关键一击：冲击帧与闪帧提示词实战》](https://vibeshot.club/courses/db35b227-98ee-4992-8bce-5eeb0fff2291/learn?lesson=2a58bddc-1285-4ecd-b154-8cc0cac4c70e) | 2026-10-10 阅读全文，未播放示范视频 | 将冲击帧、闪白、反相和闪黑绑定到具体事件；保留接触信息，明确恢复与动作后果，接入动作模板、自检和成片复盘 | [动作视觉重音](skills/personal-video-creator/references/impact-frames.md)、[动作模板](skills/personal-video-creator/assets/templates/action.txt)、[提示词自检](skills/personal-video-creator/references/prompt-self-check.md) |
 
 文字研读、样片观察和个人生成验证分别记录。上述案例库未逐条播放或重新生成；其他来源也不因方法已接入而视为个人成片验证通过。外部特定的时长、动作数、角色数量或专用格式，按当前目标筛选使用。
 
-后续每次新增或扩展外部参考，同步维护本表与[来源记录](skills/personal-video-creator/references/external-methods.md)：注明来源名称、实际已读范围、采用的方法和对应入口；已有来源补充研读时更新原行。只保留方法与必要的文字来源，不收录外部样片资料或网址。
+后续每次新增或扩展外部参考，同步维护本表与[来源记录](skills/personal-video-creator/references/external-methods.md)：来源名称必须附已核对的原始链接，开源项目链接到对应仓库，教程链接到原课程页；用户提供且无公开来源的文稿链接到仓库内原文，不推测开源地址。同时注明实际已读范围、采用的方法和对应入口；已有来源补充研读时更新原行。不收录外部样片资料或样片网址。
 
 ## 安装
 
@@ -186,4 +186,4 @@ skills/personal-video-creator/
 
 新增或扩展外部方法参考时，同次更新上方参考表和技能中的来源记录，核对方法入口、阅读范围与验证状态，再同步安装版本并提交仓库。
 
-本仓库提交创作方法、模板与个人最终提示词；外部样片仅供参考分析，不写入样片资料、账号、视频文件名、视频地址或网址。
+本仓库提交创作方法、模板与个人最终提示词；外部样片仅供参考分析，不写入样片资料、账号、视频文件名或样片网址。README 的参考来源保留可点击的原始仓库、教程或文稿链接。
