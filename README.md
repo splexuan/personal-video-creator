@@ -128,23 +128,20 @@ skills/personal-video-creator/
 
 ## 外部方法参考
 
-已从 ZeroLu 的社区案例库及 LearnPrompt 的案例与方法库整理参考，主要用于素材分工、喜剧笑点时间安排和逐镜复盘。详见[来源与适用条件](skills/personal-video-creator/references/external-methods.md)，仅保留必要的文字方法来源，不写入外部网址。
+下表汇总已研读并融合的方法来源。只登记实际阅读与采用的范围；具体适用条件见[外部方法参考](skills/personal-video-creator/references/external-methods.md)。
 
-已逐条研读 ZeroLu 的 21 条完整记录，并从 LearnPrompt 的 795 条记录中累计选读 47 条，覆盖其快照的 27 种分类。47 条中含两条分镜页生图稿，已与视频提示词区分；本次没有逐条播放或重新生成外部视频。
+| 参考来源 | 已读范围 | 提炼与融合内容 | 方法入口 |
+| --- | --- | --- | --- |
+| ZeroLu / awesome-seedance-2.5 | 21 条完整提示词记录 | 连续情绪与表演、构图揭晓、道具因果、异常规则和日常收尾 | [提示词研读方法](skills/personal-video-creator/references/external-cases.md)、[生活情景](skills/personal-video-creator/references/life-scenes.md) |
+| LearnPrompt / awesome-seedance | 从 795 条记录快照中累计选读 47 条，含 2 条分镜页生图稿；分类映射覆盖 27 种原库分类 | 参考素材分工、喜剧笑点时间安排、类型模板与逐镜复盘；生图稿与视频稿分别处理 | [外部方法](skills/personal-video-creator/references/external-methods.md)、[类型索引](skills/personal-video-creator/references/video-types.md)、[反馈流程](skills/personal-video-creator/references/feedback.md) |
+| jijiutong / AI Visual Director | 相关引擎、表演指导及 2 条文字示例 | 素材职责、空间调度、视线、表演停顿与跨镜状态 | [导演设计](skills/personal-video-creator/references/directing.md) |
+| 62656456 / AI Storyboard Director v5.2 | 精编版相关决策与全量版部分内容 | 观看终点、视觉主意、信息显露、切镜选择和事件线衔接 | [导演设计](skills/personal-video-creator/references/directing.md) |
+| 《电影级 AI 舞蹈视频编舞导演》 | 用户提供的完整 27 节原文 | 音乐乐句、动作短句、身体力学、过渡动量、动态对比、表情、衣发与摄影；结合互动表演方法组织短舞和 MV | [原文](docs/dance-choreography-director.md)、[统一舞蹈导演](skills/personal-video-creator/references/dance-performance.md)、[完整编排](skills/personal-video-creator/references/dance-composition.md) |
+| Arvin《AI打斗的关键一击：冲击帧与闪帧提示词实战》 | 2026-10-10 阅读全文，未播放示范视频 | 将冲击帧、闪白、反相和闪黑绑定到具体事件；保留接触信息，明确恢复与动作后果，接入动作模板、自检和成片复盘 | [动作视觉重音](skills/personal-video-creator/references/impact-frames.md)、[动作模板](skills/personal-video-creator/assets/templates/action.txt)、[提示词自检](skills/personal-video-creator/references/prompt-self-check.md) |
 
-生活情景的连续情绪、构图揭晓、道具因果和日常收尾见[提示词研读方法](skills/personal-video-creator/references/external-cases.md)。其他类型的模板与分类对应见[类型索引](skills/personal-video-creator/references/video-types.md)。模板保留具体方法，外部样片仅供分析，不收录样片资料或网址。
+文字研读、样片观察和个人生成验证分别记录。上述案例库未逐条播放或重新生成；其他来源也不因方法已接入而视为个人成片验证通过。外部特定的时长、动作数、角色数量或专用格式，按当前目标筛选使用。
 
-外部已有验证的案例可直接按题材参考；新故事的生成结果继续单独积累。含蓄情感戏的无声停顿、猫狗双角色等当前剧情要求优先；某个外部案例的特定限制不作为通用要求。
-
-已将 AI Visual Director 的素材分工、调度、视线、表演与状态方法，以及 AI Storyboard Director v5.2 的观看终点、视觉概念、信息显露与镜头衔接方法，落实到技能流程、[导演设计](skills/personal-video-creator/references/directing.md)和相关模板。研读范围、适配与未采用的源项目规则见该文件的来源说明。直接交付可用提示词，结构按类型选择；不要求先安装源项目或补做整套参考图。
-
-用户此前提供的[《电影级 AI 舞蹈视频编舞导演》原文](docs/dance-choreography-director.md)与参考分析提炼的互动表演方法已整合到[统一舞蹈导演](skills/personal-video-creator/references/dance-performance.md)：共同设计音乐乐句、动作短句、身体力学、过渡动量、动态对比、表情、衣发与摄影，再按短互动舞或 MV 的目标选择提示词结构。原文中的固定动作数、旋转次数、表情禁用及 H3 / I2VA 专用格式不作为所有舞蹈的默认限制。
-
-舞蹈的[创作准备](skills/personal-video-creator/references/dance-preparation.md)区分已有合用图、局部图与无图：需要复用身份、完整造型或首帧时建议准备图片，一次性文字创作可以直接写视频稿。半身侧重表情与上半身，七分身兼顾肩髋膝，全身看关键步法与地面；参考图景别与视频景别分别选择。需要准备图时交付[参考图提示词](skills/personal-video-creator/assets/dance-reference-image-template.txt)，用户已授权生成才执行生图，随后检查并继续编舞。
-
-编舞节奏区分音乐脉冲、动作速度、动作密度和能量，设计重音、延长、短停、回收与变奏。已有音频按实际听审安排，无音频先给可调整的节奏设计；不把快音乐等同于大量动作，也不把八拍当固定秒数。MV 时间线按实际段落展开，不预设五段结构。
-
-完整编排方法进一步明确主句与对比材料、整体观看发展、视觉高光和结束关系。短舞与 MV 模板已接入这些决定，先完成表演设计再细化衔接；检查时暂时去掉音乐、运镜和美学形容词，确认身体行为本身有辨识度与可见发展。
+后续每次新增或扩展外部参考，同步维护本表与[来源记录](skills/personal-video-creator/references/external-methods.md)：注明来源名称、实际已读范围、采用的方法和对应入口；已有来源补充研读时更新原行。只保留方法与必要的文字来源，不收录外部样片资料或网址。
 
 ## 安装
 
@@ -186,5 +183,7 @@ skills/personal-video-creator/
 满意成片用于学习时，保留实际使用的最终提示词原文，并记录认可的是总体效果还是具体细节。案例经验先放案例说明，明确长期偏好进入偏好文件，可推广的方法进入创作方法文件。
 
 本机已安装技能的后续修改需要同步到本仓库后再提交。新类别有实际请求和具体案例方法时再扩展；外部案例支持的模板与个人成片已验证的方法分开记录。
+
+新增或扩展外部方法参考时，同次更新上方参考表和技能中的来源记录，核对方法入口、阅读范围与验证状态，再同步安装版本并提交仓库。
 
 本仓库提交创作方法、模板与个人最终提示词；外部样片仅供参考分析，不写入样片资料、账号、视频文件名、视频地址或网址。
