@@ -95,6 +95,8 @@
 
 ## 结构
 
+交付视频提示词前，执行[逐段自检与修正](skills/personal-video-creator/references/prompt-self-check.md)，检查因果、空间、连续性、表演容量与指令冲突。需要冲击帧、闪白、反相或闪黑时，使用[动作视觉重音](skills/personal-video-creator/references/impact-frames.md)，将效果绑定到具体事件，并接续恢复后的动作结果。两项方法已接入技能入口和相应创作流程；文本检查与成片验证分别记录。
+
 `docs/` 保存导演原文；可安装的个人技能位于以下目录。
 
 ```text
