@@ -23,7 +23,7 @@
 | 人物分享与 UGC 测评 | 面对镜头分享、开箱、使用演示与体验反应 | 说话者、实际操作、观察与口语回应 | [填写模板](../assets/templates/ugc-review.txt) |
 | 时装与造型展示 | Lookbook、街拍、走秀与服装细节 | 廓形、材料、配饰与造型之间的区别 | [填写模板](../assets/templates/fashion.txt) |
 | 音乐 MV 与舞蹈 | 音频驱动编舞、演唱、节奏剪辑与单人互动舞 | 完整表演的主句、节奏、对比、高光与结尾，参考图、取景及真实音乐依据 | [完整编排](dance-composition.md)、[创作准备](dance-preparation.md)、[统一舞蹈导演](dance-performance.md)、[MV 模板](../assets/templates/music-video.txt)、[单人舞短版](../assets/templates/dance-short.txt) |
-| 动作与搏斗 | 攻防、追逐、近身动作与战斗段落 | 攻击意图、闪避、接触、后果与回位 | [填写模板](../assets/templates/action.txt) |
+| 动作与搏斗 | 攻防、追逐、近身动作与战斗段落 | **先定动作单元密度**，再排七拍动作链、受力与尺度、空间调度、技能生命周期与动作容量 | [填写模板](../assets/templates/action.txt)、[动作密度与节奏](pacing.md)、[动作与受力语法](action-craft.md)、[机位可行性与冲击预算](camera-feasibility.md) |
 | 运动与极限挑战 | 比赛、闯关、跳跃与运动表现 | 路线、重心、完成动作与成绩后反应 | [填写模板](../assets/templates/sports.txt) |
 | 车辆与驾驶 | 汽车、摩托、骑行旅程与行驶展示 | 车辆结构、道路连续、接地与摄影来源 | [填写模板](../assets/templates/vehicles.txt) |
 | 奇幻与科幻 | 能力、异世界、未来场景和视觉奇观 | 异常规则、作用范围、物理反馈与后果 | [填写模板](../assets/templates/fantasy-scifi.txt) |
@@ -81,9 +81,11 @@
 
 ## 来源与状态
 
-来源固定为 ZeroLu 案例库和 LearnPrompt 案例数据，整理日期 2026-10-08。
+来源为 ZeroLu 案例库（21 条）和 LearnPrompt 案例数据（831 条），2026-10-12 完成全量收录。打斗类另吸收 `liyue-aigc/seedance-2-5-fight-director`（2026-10-12 全量读取其 12 个参考文件），改写进[动作与受力语法](action-craft.md)与[机位可行性与冲击预算](camera-feasibility.md)；该仓库无 LICENSE，只吸收方法、不复制原文。
 
-已读 ZeroLu 的 21 条完整记录；LearnPrompt 累计选读 47 条，其中包括两条分镜页生图稿。仅保留类型组织与方法摘要，不收录外部样片或来源网址。研读提示词不等于个人重新生成成功。
+两库的完整条目见[外部提示词库索引](external-library/index.md)；66 条金牌样本的提示词全文见同目录 `samples-*.md`；按题材组织的结构块、指导与陷阱见[模板结构规则](external-library/structural-rules.md)。样片视频、账号与外部网址不收录，收录不等于个人重新生成成功。
+
+平台规格与提示词语法另记在[平台口径与已核事实](platform-notes.md)，逐条标注证据等级；库里的锚点样本来自外部来源，其效果是原作者的声称或来源标注，不是本机验证结论。
 
 这些填写模板是从研读方法整理出的个人创作工具。模板改编的新片仍按[反馈流程](feedback.md)记录实际结果；既有个人案例不因扩充类型而改写。
 

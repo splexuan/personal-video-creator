@@ -7,6 +7,7 @@
 ## 能做什么
 
 - 按内容目标选择模板，设计不同的故事、展示、表演或交互流程。
+- 只有一个模糊想法时，先发散出几个机制不同的候选并淘汰择优，不让第一条思路直接成为全片。
 - 先确定观看终点和具体视觉主意，设计信息显露、调度、表演、切镜与跨镜状态。
 - 根据角色多角度参考绑定身份，也支持动物、产品、场景、音频与界面素材。
 - 写清表情、动作、接触、材料变化和状态反馈，使画面有具体依据。
@@ -57,7 +58,7 @@
 
 | 视频类型 | 适合创作的内容 | 创作重点 | 模板入口 |
 | --- | --- | --- | --- |
-| **10. 动作与搏斗** | 攻防、对峙、追逐、闪避、近身搏斗与战斗片段 | 写清行动意图、准备、攻击或移动路径、接触、后果与回位；重心和空间关系可信，摄影能看见关键动作与结果 | [动作模板](skills/personal-video-creator/assets/templates/action.txt) |
+| **10. 动作与搏斗** | 攻防、对峙、追逐、闪避、近身搏斗与战斗片段 | **先按动作单元定密度（目标落地值的两到三倍），再写画面**：写清行动意图、准备、攻击或移动路径、接触、后果与回位；重心和空间关系可信，摄影能看见关键动作与结果。方法见[动作密度与节奏](skills/personal-video-creator/references/pacing.md)、[动作与受力语法](skills/personal-video-creator/references/action-craft.md)与[机位可行性与冲击预算](skills/personal-video-creator/references/camera-feasibility.md) | [动作模板](skills/personal-video-creator/assets/templates/action.txt) |
 | **11. 运动与极限挑战** | 跑跳、球类表现、运动技巧、闯关、跳跃与极限挑战片段 | 路线、起步、承重、腾空或关键动作、落地与完成条件明确；镜头保留重要接地过程，完成后有成绩反馈或人物反应 | [运动模板](skills/personal-video-creator/assets/templates/sports.txt) |
 | **12. 车辆与驾驶** | 汽车或摩托展示、驾驶片段、自行车骑行、道路行驶与旅程 | 车辆外形、车轮与接地连续，道路和行进方向清楚；区分车内、车外及跟拍机位，摄影运动与车辆路线相容 | [车辆模板](skills/personal-video-creator/assets/templates/vehicles.txt) |
 | **13. 奇幻与科幻** | 异能、魔法、未来科技、异世界、异常变换与视觉奇观 | 先定义能力或异常的规则、作用对象与范围，再写启动、过程、环境反馈和后果；效果发生后保留相应状态 | [奇幻科幻模板](skills/personal-video-creator/assets/templates/fantasy-scifi.txt) |
@@ -105,7 +106,7 @@
 
 ## 结构
 
-交付视频提示词前，执行[逐段自检与修正](skills/personal-video-creator/references/prompt-self-check.md)，检查因果、空间、连续性、表演容量与指令冲突。需要冲击帧、闪白、反相或闪黑时，使用[动作视觉重音](skills/personal-video-creator/references/impact-frames.md)，将效果绑定到具体事件，并接续恢复后的动作结果。两项方法已接入技能入口和相应创作流程；文本检查与成片验证分别记录。
+交付视频提示词前，执行[逐段自检与修正](skills/personal-video-creator/references/prompt-self-check.md)，检查因果、空间、连续性、表演容量与指令冲突。需要冲击帧、闪白、反相或闪黑时，使用[动作视觉重音](skills/personal-video-creator/references/impact-frames.md)，将效果绑定到具体事件，并接续恢复后的动作结果。打斗、追逐、群战或冲撞等对抗片先读[动作密度与节奏](skills/personal-video-creator/references/pacing.md)定动作单元总数与幅度，再读[动作与受力语法](skills/personal-video-creator/references/action-craft.md)与[机位可行性与冲击预算](skills/personal-video-creator/references/camera-feasibility.md)。成片被反馈"像减速、站在原地等时间"时用 `scripts/motion-audit.py` 实测定位死区；被反馈"一直在动但不像打斗"时用 `scripts/fight-metrics.py` 实测幅度与打击声，两者都不要凭感觉改词。确认平台能力、素材上限、引用标签或提示词语法时读[平台口径与已核事实](skills/personal-video-creator/references/platform-notes.md)。这些方法已接入技能入口和相应创作流程；文本检查与成片验证分别记录。
 
 `docs/` 保存导演原文；可安装的个人技能位于以下目录。
 
@@ -118,13 +119,21 @@ skills/personal-video-creator/
 │   ├── dance-reference-image-template.txt 舞蹈角色图或首帧提示词起点
 │   ├── templates/                  其他内容模板及单人舞短版
 │   └── modifiers/                  5 组画风与制作方法补充写法
+├── scripts/                        成片实测脚本：运动能量、幅度与打击声
 └── references/
     ├── preferences.md               个人偏好及适用范围
     ├── video-types.md               类型选择、模板与方法入口
     ├── video-core.md                多类型共用写法与检查标准
     ├── video-reverse-engineering.md  视频逆向、参考图准备、换人复用与成片对照
+    ├── creative-divergence.md        创意发散、视觉机制与方案淘汰
     ├── directing.md                 观看目标、视觉主意与镜头决策
-    ├── cinematography.md            构图、空间、光影、运动与整段观看体验
+    ├── cinematography.md            构图、空间、光影、运动、画面强度与整段观看体验
+    ├── action-craft.md              七拍动作链、受力四通道与尺度、空间调度、技能生命周期与动作容量
+    ├── pacing.md                    动作密度与幅度指标、持物轨迹、节奏型与成片实测判据
+    ├── camera-feasibility.md        机位风险与安全替代、遮挡转场、冲击预算、能力框与两条产线
+    ├── impact-frames.md             冲击帧、闪白、反相与闪黑的写法
+    ├── platform-notes.md            平台规格与提示词语法，逐条标注证据等级
+    ├── prompt-self-check.md         交付前的逐段自检与修正
     ├── life-scenes.md               生活情景创作方法
     ├── dance-preparation.md         参考图分支、取景选择与创作推进
     ├── dance-composition.md         整支舞的记忆点、发展、节奏、对比与高光
@@ -132,9 +141,12 @@ skills/personal-video-creator/
     ├── feedback.md                  成片反馈与维护方法
     ├── external-methods.md          外部方法、来源与适用条件
     ├── external-cases.md            提示词研读提炼的方法
+    ├── external-library/            外部提示词库：索引、金牌样本全文与模板结构规则
     ├── case-index.md                案例状态与资料索引
     └── cases/                       个人案例说明及已有提示词
 ```
+
+技能内另有 `scripts/motion-audit.py`：输入一条成片，输出逐秒运动能量、最长近静止区间、运动最高点落位与帧复制检查，用于客观判断动作类短片"够不够快"。配套的 `scripts/fight-metrics.py` 管第二件事：输出高强度帧占比、爆发帧占比、逐秒峰均比、单帧最大位移与音频峰值，直接对"动得够不够大、打击声有没有打实"给出通过／不足，并可用 `--ref` 与参照片并排对照。判据与用法见[动作密度与节奏](skills/personal-video-creator/references/pacing.md)。
 
 从[技能入口](skills/personal-video-creator/SKILL.md)阅读。新创作或重做镜头方案先使用[导演设计](skills/personal-video-creator/references/directing.md)，再结合[摄影与画面设计](skills/personal-video-creator/references/cinematography.md)、[共用写法](skills/personal-video-creator/references/video-core.md)和本次对应的模板；小范围修改保留已有设计。具体视频反推使用[视频逆向与复刻](skills/personal-video-creator/references/video-reverse-engineering.md)。参考自己以前的作品时查看[个人案例索引](skills/personal-video-creator/references/case-index.md)。
 
@@ -144,16 +156,30 @@ skills/personal-video-creator/
 
 | 参考来源 | 已读范围 | 提炼与融合内容 | 方法入口 |
 | --- | --- | --- | --- |
-| [ZeroLu / awesome-seedance-2.5](https://github.com/ZeroLu/awesome-seedance-2.5) | 21 条完整提示词记录 | 连续情绪与表演、构图揭晓、道具因果、异常规则和日常收尾 | [提示词研读方法](skills/personal-video-creator/references/external-cases.md)、[生活情景](skills/personal-video-creator/references/life-scenes.md) |
-| [LearnPrompt / awesome-seedance](https://github.com/LearnPrompt/awesome-seedance) | 从 795 条记录快照中累计选读 47 条，含 2 条分镜页生图稿；分类映射覆盖 27 种原库分类 | 参考素材分工、喜剧笑点时间安排、类型模板与逐镜复盘；生图稿与视频稿分别处理 | [外部方法](skills/personal-video-creator/references/external-methods.md)、[类型索引](skills/personal-video-creator/references/video-types.md)、[反馈流程](skills/personal-video-creator/references/feedback.md) |
+| [ZeroLu / awesome-seedance-2.5](https://github.com/ZeroLu/awesome-seedance-2.5) | 21 条完整提示词，2026-10-12 起全量收录 | 连续情绪与表演、构图揭晓、道具因果、异常规则和日常收尾 | [外部提示词库](skills/personal-video-creator/references/external-library/index.md)、[提示词研读方法](skills/personal-video-creator/references/external-cases.md) |
+| [LearnPrompt / awesome-seedance](https://github.com/LearnPrompt/awesome-seedance) | 831 条记录，2026-10-12 起全量收录；另收录其 27 个模板的结构块、指导与陷阱 | 参考素材分工、喜剧笑点时间安排、类型模板与逐镜复盘；模板结构与锚点样本 | [外部提示词库](skills/personal-video-creator/references/external-library/index.md)、[模板结构规则](skills/personal-video-creator/references/external-library/structural-rules.md)、[外部方法](skills/personal-video-creator/references/external-methods.md) |
 | [jijiutong / AI Visual Director](https://github.com/jijiutong/ai-visual-director) | 相关引擎、表演指导及 2 条文字示例 | 素材职责、空间调度、视线、表演停顿与跨镜状态 | [导演设计](skills/personal-video-creator/references/directing.md) |
 | [62656456 / AI Storyboard Director v5.2](https://github.com/62656456/ai-storyboard-director-v5.2) | 精编版相关决策与全量版部分内容 | 观看终点、视觉主意、信息显露、切镜选择和事件线衔接 | [导演设计](skills/personal-video-creator/references/directing.md) |
 | [《电影级 AI 舞蹈视频编舞导演》](docs/dance-choreography-director.md) | 用户提供的完整 27 节原文 | 音乐乐句、动作短句、身体力学、过渡动量、动态对比、表情、衣发与摄影；结合互动表演方法组织短舞和 MV | [原文](docs/dance-choreography-director.md)、[统一舞蹈导演](skills/personal-video-creator/references/dance-performance.md)、[完整编排](skills/personal-video-creator/references/dance-composition.md) |
 | [Arvin《AI打斗的关键一击：冲击帧与闪帧提示词实战》](https://vibeshot.club/courses/db35b227-98ee-4992-8bce-5eeb0fff2291/learn?lesson=2a58bddc-1285-4ecd-b154-8cc0cac4c70e) | 2026-10-10 阅读全文，未播放示范视频 | 将冲击帧、闪白、反相和闪黑绑定到具体事件；保留接触信息，明确恢复与动作后果，接入动作模板、自检和成片复盘 | [动作视觉重音](skills/personal-video-creator/references/impact-frames.md)、[动作模板](skills/personal-video-creator/assets/templates/action.txt)、[提示词自检](skills/personal-video-creator/references/prompt-self-check.md) |
+| [liyue-aigc / seedance-2-5-fight-director](https://github.com/liyue-aigc/seedance-2-5-fight-director) | 2026-10-12 全量读取其 12 个参考文件（约 185 KB）并改写吸收；**该仓库无 LICENSE 文件，只吸收方法、不复制原文** | 七拍动作链、受力反馈四通道与尺度分级、反馈链目录、空间调度与介质层穿越三段式、能力与武器生命周期六步、环境破坏五级、声音五层、动作容量成本表、群体战密度、群战与对轰规则、机位可行性黑名单、遮挡转场、冲击预算、单段能力框与两条产线 | [动作与受力语法](skills/personal-video-creator/references/action-craft.md)、[机位可行性与冲击预算](skills/personal-video-creator/references/camera-feasibility.md)、[动作模板](skills/personal-video-creator/assets/templates/action.txt) |
 
 文字研读、样片观察和个人生成验证分别记录。上述案例库未逐条播放或重新生成；其他来源也不因方法已接入而视为个人成片验证通过。外部特定的时长、动作数、角色数量或专用格式，按当前目标筛选使用。
 
 后续每次新增或扩展外部参考，同步维护本表与[来源记录](skills/personal-video-creator/references/external-methods.md)：来源名称必须附已核对的原始链接，开源项目链接到对应仓库，教程链接到原课程页；用户提供且无公开来源的文稿链接到仓库内原文，不推测开源地址。同时注明实际已读范围、采用的方法和对应入口；已有来源补充研读时更新原行。不收录外部样片资料或样片网址。
+
+## 平台口径来源
+
+核对 Seedance 2.5 与即梦 / Dreamina 的平台规格与提示词语法时使用的来源。逐条结论与证据等级见[平台口径与已核事实](skills/personal-video-creator/references/platform-notes.md)。
+
+| 来源 | 核对日期与实际读到什么 | 用于 |
+| --- | --- | --- |
+| [Dreamina 官方 Seedance 2.5 提示词指南](https://dreamina.capcut.com/seedance/seedance-2-5-prompt) | 2026-10-12 **直接读取正文**；页面标注 Aug 18, 2026 | 八段式结构与固定顺序、素材标签写法、`Preserve`／`Avoid` 模板、负向约束的写法要求、时间戳示例格式、"关键指令只说一次" |
+| [字节 Seed 官方 Seedance 2.5 发布说明](https://seed.bytedance.com/en/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5) | 2026-10-12 两次尝试，**页面为脚本渲染，正文未取到**；官方模型页同样未取到 | 未读到内容，不列为已核对 |
+| [BytePlus ModelArk 官方 Seedance 2.5 提示词指南](https://docs.byteplus.com/pt/docs/ModelArk/2607689) | 2026-10-12 通过公开检索片段读到部分正文；直接打开英文与中文页面均为空页 | 时间戳的三种控制方式与连续性要求、负向控制（字幕／BGM／音频）、首尾帧锁画幅、白模参考 |
+| 多份对同一官方指南的独立转述（含一份官方指南的完整中文译本） | 2026-10-12；四至五份来源互相一致，本次**未能直接读到官方原文** | 素材上限与推荐区间、四种声音与文字分隔符、参考素材"不得用'分别是'句式"的规则、"一镜一个主运镜" |
+
+未读到的内容不列为已核对；单一来源的条目在平台口径册中保持【二手待核】，不因登记而升格为平台事实。平台规格会变化，实际入口优先。
 
 ## 安装
 
@@ -187,16 +213,22 @@ skills/personal-video-creator/
 
 | 案例 | 状态 |
 | --- | --- |
-| 女仆装攻防战 | 用户认可情绪与表情；保存方法摘要，未标为逐字最终稿或直接看片结论 |
-| 明天 | 用户整体正面反馈；保留最终提示词，已核对关键画面并记录连续反应与结尾动作；声音未完成听审 |
-| 狗打的 | 待用户确认；保留现存十秒稿和画面复盘，实际提交稿对应关系未确认 |
-| 地铁复仇喜剧 | 待用户确认；保留提示词原文，已核对画面与文字区域逐帧；收尾字幕多字与同句配音念错已确认为生成端所出 |
-| 气球沙发升空（西游记三人组） | 待用户确认；保留参考静帧与视频两份提示词，已核对成片两张抽帧与文件参数（3:4 落地正确、开场按文字走）；人声语感问题为用户反馈，未听审 |
+| 女仆装攻防战 | 用户认可整体效果，此前已认可情绪与表情；保存方法摘要，未标为逐字最终稿或直接看片结论 |
+| 明天 | 用户认可整体效果；保留最终提示词，已核对关键画面并记录连续反应与结尾动作；声音未完成听审 |
+| 狗打的 | 用户认可整体效果；保留现存十秒稿和画面复盘，实际提交稿对应关系未确认 |
+| 地铁复仇喜剧 | 用户认可整体效果（认可对象为经用户后期加工的第一版，文件参数不代表生成规格）；保留提示词原文，已核对画面与文字区域逐帧；收尾字幕多字与同句配音念错已确认为生成端所出 |
+| 气球沙发升空（西游记三人组） | 用户认可整体效果；保留参考静帧与视频两份提示词，已核对成片两张抽帧与文件参数（3:4 落地正确、开场按文字走）；人声语感问题为用户反馈，未听审 |
+| 樱花庭院古装人像 | 用户认可整体效果；保留提示词原文，本次未查看成片；人体结构与机位的主动约束已提炼进共用写法，未声称已在成片验证 |
+| 东方玄幻樱花剑尊特效片 | 用户认可整体效果（提交收录即记认可）；保留提示词原文，本次未查看成片；“无血液以主题材质替代”与动作密度上限已提炼进动作模板，不声称已生成成功 |
+| 魔法笔·街道交通 Vlog | 用户认可整体效果（提交收录即记认可）；保留提示词原文，未查看成片；“变形锚定”（换外观、保运动学）已提炼进混合画风补充写法；稿内两处光照规则互斥照旧保留 |
+| 真人自拍特写（皮肤质感） | 用户认可整体效果（提交收录即记认可）；保留提示词原文（含原文重复段与混用时间码），未查看成片；真实质感的分级写法已提炼进共用写法，“无磨皮／（磨皮感）”用词冲突照旧标出 |
 | 在湖边，把时间忘了 | 未达到目标；用户明确反馈表达不明。保留交付稿与抽帧复盘，用于诊断观看过程和情绪表达不足，实际提交稿未确认，不作成功参考 |
+| 香港动作片后巷打斗 | 分层结论：美术层通过、节奏层失败；用户反馈“打斗不流畅、节奏不紧凑、好像减速了一样、站在原地等时间”。已用运动能量实测定位 5.29 秒死区（正好落在写明的决胜段）、最高点落在转场、零重复帧。保留 v1 交付稿与失败复盘，四条根因与量化诊断法已提炼进动作密度方法，不作成功参考 |
+| 外卖仔打斗（《滚汤》修正稿 v2.1） | 分层结论：密度层通过、幅度层失败、连续性层失败。上一版整改有效——最长近静止区间由 5.29 秒降到 0.12 秒、全片无死区；用户新反馈“穿帮太多了”“根本没有打斗的感觉”并提交一条参照短片，实测对照为高强度帧占比 7.6%（参照 24.3%）、爆发帧 4.0%（参照 9.3%）、强打击点 0 个（参照 2 个），即“一直在动但都不大”。逐帧确认六处穿帮（锅盖状态矛盾、空锅不空、持物塌回静态摆姿、后段环境物消失、收尾未落地、铁闸与床单不见）。保留 v2.1 交付稿与失败复盘，五条根因与幅度指标已提炼进动作密度与节奏方法，不作成功参考 |
 
 ## 持续维护
 
-满意成片用于学习时，保留实际使用的最终提示词原文，并记录认可的是总体效果还是具体细节。案例经验先放案例说明，明确长期偏好进入偏好文件，可推广的方法进入创作方法文件。
+用户提交稿件要求收录即视为整体认可，不必再追问效果意见。满意成片用于学习时，保留实际使用的最终提示词原文，并记录认可的是总体效果还是具体细节。案例经验先放案例说明，明确长期偏好进入偏好文件，可推广的方法进入创作方法文件。
 
 本机已安装技能的后续修改需要同步到本仓库后再提交。新类别有实际请求和具体案例方法时再扩展；外部案例支持的模板与个人成片已验证的方法分开记录。
 
