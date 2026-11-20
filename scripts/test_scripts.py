@@ -86,6 +86,22 @@ def test_offline():
     fm.show("dummy", m)
     print("[通过] fight-metrics：五项读数、百分位插值、报告输出")
 
+    # ---- lint-prompt ----
+    lp = load("lint-prompt")
+    bad, _, _ = lp.lint(lp.BAD, images=2, action=True)
+    good, _, _ = lp.lint(lp.GOOD, images=2, action=True)
+    bad_fail = {r[1] for r in bad if r[0] == lp.FAIL}
+    good_fail = [r for r in good if r[0] == lp.FAIL]
+    assert {"残留", "时间戳", "素材指派"} <= bad_fail, "lint 漏报了反例：%s" % bad_fail
+    assert not good_fail, "lint 对正例误报：%s" % good_fail
+    nested = ("12 秒\n镜头01｜0—4 秒\n0—1.5 秒：他侧身。\n1.5—2.8 秒：他后撤。\n"
+              "2.8—4 秒：他撞上门框。\n镜头02｜4—12 秒\n[00:04-00:12] 两人扭打，抓衣领、摔向水面。\n"
+              "不要字幕。\n@图片1 定义男主。")
+    res, _, _ = lp.lint(nested, images=1)
+    assert not [r for r in res if r[0] == lp.FAIL], "嵌套时间线被误判：%s" % res
+    assert any("子时间线" in r[2] for r in res), "未识别嵌套时间线"
+    print("[通过] lint-prompt：残留/时间戳/标签/句式 + 嵌套时间线不误报")
+
     # ---- 缺依赖时的行为 ----
     if ma.require_ffmpeg() is False:
         print("[通过] 缺失 ffmpeg 时给出安装指引而不是抛异常")
