@@ -225,6 +225,41 @@ Subtitle: [Thanks for eating with me. See you next time, bye!]
 Maintain consistent facial features, hairstyle, outfit, body proportions, and environment throughout. Keep the performance spontaneous rather than overly scripted. Natural blinking, subtle head movements, realistic chewing, authentic hand gestures, visible steam, realistic food textures, soft room ambience, and handheld smartphone camera motion. No voice-over; all dialogue is spoken directly to the camera. Subtitles remain bracketed in English exactly as shown.
 ```
 
+### L716 · 迷你厨娘的巨型爆米花大作战
+*LearnPrompt · L2 有跨模型重测 · Seedance · 原文 2134 字符*
+
+```text
+A miniature hand-drawn 2D animated girl with curly black hair, a pink apron, yellow sneakers, and a tiny wooden spatula, making a giant bowl of popcorn inside a realistic full-sized kitchen.
+
+Style
+Mixed-reality hybrid animation combining playful 2D hand-drawn doodle character art with a photorealistic live-action kitchen. Whimsical stop-motion physics, expressive line animation, exaggerated scale, warm cinematic lighting, playful food-preparation energy, and detailed cooking sound effects.
+
+Camera & Framing
+Macro close-ups, dramatic low angles, overhead kitchen perspectives, fast tracking shots, extreme close-ups, and shallow depth of field emphasizing the tiny chef against gigantic kitchen objects.
+
+Audio & Scene Breakdown
+
+Visual: The tiny chef struggles to drag a giant corn kernel across the countertop, finally pushing it toward an enormous glass bowl.
+
+Visual: She climbs onto a giant butter cube, slides down its smooth surface, and lands beside the bowl as kernels begin bouncing around her.
+
+Visual: She jumps onto a giant wooden spoon and uses it as a seesaw, launching herself directly into the bowl.
+
+Visual: The kernels suddenly begin popping around her. She dodges exploding popcorn pieces while using the spoon to push them into a growing pile.
+
+Visual: One enormous popcorn piece launches her into the air. She lands on top of it and rides it across the countertop like a tiny fluffy vehicle.
+
+Visual: She grabs a giant salt shaker, struggles to tilt it, and accidentally creates a huge shower of salt that covers the popcorn and sends her sliding across the counter.
+
+Visual: She reaches the finished bowl, climbs a giant popcorn piece, and proudly places a tiny piece of caramel on top.
+
+Visual: The camera pulls back to reveal the giant bowl of popcorn. The tiny chef sits beside it, exhausted and proud—until a huge hand suddenly grabs the entire bowl and walks away.
+
+She stares at the empty countertop in complete disbelief.
+
+Audio: Kernel rattles, spoon clinks, popcorn popping, tiny footsteps, bowl vibrations, salt shaker sounds, sliding effects, comedic impacts, playful upbeat music, no dialogue.
+```
+
 ## 制作与改造过程
 
 ### L468 · Bladesmith Competition Reality TV Video

@@ -8,6 +8,7 @@
 
 import importlib.util
 import os
+import re
 import sys
 import tempfile
 
@@ -124,6 +125,27 @@ def test_offline():
     over, _, _ = lp.lint("@图片1 男主。@图片2 女主。12 秒。不要字幕。", images=40)
     assert any(r[0] == lp.FAIL and r[1] == "平台上限" for r in over), "参考图 40 张未报 FAIL"
     print("[通过] 回归 参考图 40 张              FAIL=1  超上限必须拦下")
+
+    # ---- 目录一致性：catalog 与 index 的条数、★ 数必须对得上 ----
+    lib = os.path.join(os.path.dirname(HERE), "references", "external-library")
+    cat = open(os.path.join(lib, "catalog.md"), encoding="utf-8").read()
+    total = stars = 0
+    for sec in re.split(r"\n## ", cat)[1:]:
+        name = sec.split("\n")[0]
+        m = re.match(r"(.+)（(\d+) 条）", name)
+        assert m, "分类标题缺少条数：%s" % name
+        rows = [l for l in sec.split("\n")
+                if l.startswith("| ") and not l.startswith("| 编号") and not l.startswith("| ---")]
+        assert len(rows) == int(m.group(2)), "%s 标题写 %s 条，实际 %d 行" % (name, m.group(2), len(rows))
+        total += len(rows)
+        stars += sum(1 for r in rows if "★" in r.split("|")[1])
+    assert total == 852, "目录合计应为 852，实际 %d" % total
+    assert stars == 66, "★ 应为 66 条，实际 %d" % stars
+    assert "未分类" not in cat.replace("原「未分类」", ""), "catalog 仍有未分类条目"
+    idx = open(os.path.join(lib, "index.md"), encoding="utf-8").read()
+    assert "| 未分类 |" not in idx, "index 仍有未分类行"
+    assert sum(int(x) for x in re.findall(r"\| \d+ \| (\d+) \| `samples", idx)) == 852, "index 候选总数合计不是 852"
+    print("[通过] 目录一致性：852 条、66 条 ★、分类计数与索引一致")
 
     # ---- 缺依赖时的行为 ----
     if ma.require_ffmpeg() is False:

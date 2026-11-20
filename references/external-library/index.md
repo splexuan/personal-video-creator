@@ -17,28 +17,27 @@
 
 | 题材 | ★ | 候选总数 | 全文所在册 |
 | --- | --- | --- | --- |
-| 结构基础 | 3 | 22 | `samples-special.md` |
-| 剧情与情感 | 5 | 58 | `samples-narrative.md` |
-| 反转与荒诞喜剧 | 3 | 26 | `samples-narrative.md` |
-| 动物与萌宠 | 2 | 15 | `samples-narrative.md` |
-| 旅行与日常 Vlog | 6 | 131 | `samples-lifestyle.md` |
-| 产品与品牌广告 | 4 | 33 | `samples-commercial-food.md` |
-| 人物分享与 UGC | 2 | 12 | `samples-lifestyle.md` |
-| 时装与造型 | 2 | 30 | `samples-lifestyle.md` |
-| 音乐 MV 与舞蹈 | 4 | 18 | `samples-special.md` |
-| 动作与搏斗 | 3 | 52 | `samples-action-fantasy.md` |
-| 运动与极限挑战 | 2 | 11 | `samples-action-fantasy.md` |
-| 车辆与驾驶 | 2 | 11 | `samples-action-fantasy.md` |
-| 奇幻与科幻 | 2 | 29 | `samples-action-fantasy.md` |
-| 悬疑与恐怖 | 2 | 23 | `samples-narrative.md` |
-| 美食与 ASMR | 2 | 6 | `samples-commercial-food.md` |
+| 结构基础 | 3 | 25 | `samples-special.md` |
+| 剧情与情感 | 5 | 83 | `samples-narrative.md` |
+| 反转与荒诞喜剧 | 3 | 34 | `samples-narrative.md` |
+| 动物与萌宠 | 2 | 29 | `samples-narrative.md` |
+| 旅行与日常 Vlog | 6 | 169 | `samples-lifestyle.md` |
+| 产品与品牌广告 | 4 | 42 | `samples-commercial-food.md` |
+| 人物分享与 UGC | 2 | 14 | `samples-lifestyle.md` |
+| 时装与造型 | 3 | 42 | `samples-lifestyle.md` |
+| 音乐 MV 与舞蹈 | 4 | 22 | `samples-special.md` |
+| 动作与搏斗 | 3 | 93 | `samples-action-fantasy.md` |
+| 运动与极限挑战 | 2 | 22 | `samples-action-fantasy.md` |
+| 车辆与驾驶 | 2 | 17 | `samples-action-fantasy.md` |
+| 奇幻与科幻 | 3 | 57 | `samples-action-fantasy.md` |
+| 悬疑与恐怖 | 2 | 29 | `samples-narrative.md` |
+| 美食与 ASMR | 3 | 18 | `samples-commercial-food.md` |
 | 制作与改造过程 | 2 | 19 | `samples-commercial-food.md` |
 | 游戏感任务与界面 | 2 | 15 | `samples-commercial-food.md` |
-| 动画与混合画风 | 3 | 67 | `samples-special.md` |
-| 复古 DV 与档案影像 | 5 | 25 | `samples-lifestyle.md` |
-| 第一人称与连续长镜头 | 3 | 13 | `samples-special.md` |
-| 时间冻结、倒放与变速 | 4 | 9 | `samples-special.md` |
-| 未分类 | 3 | 227 | `samples-special.md` |
+| 动画与混合画风 | 3 | 70 | `samples-special.md` |
+| 复古 DV 与档案影像 | 5 | 26 | `samples-lifestyle.md` |
+| 第一人称与连续长镜头 | 3 | 15 | `samples-special.md` |
+| 时间冻结、倒放与变速 | 4 | 11 | `samples-special.md` |
 
 ---
 
@@ -110,6 +109,7 @@
 | --- | --- | --- | --- |
 | ★L296 | 电影感巴黎时尚广告大片：五镜头街拍 | L2 | 2414 |
 | ★L299 | 电影感护肤美妆 Vlog | L2 | 1860 |
+| ★L663 | 未来街头时装七套造型变换 | L2 | 3522 |
 
 ### 音乐 MV 与舞蹈
 
@@ -148,6 +148,7 @@
 | --- | --- | --- | --- |
 | ★L409 | 从雨巷涟漪到极光之眼 | L2 | 4535 |
 | ★L410 | 折叠成球的威尼斯送信之旅 | L2 | 3788 |
+| ★L642 | 餐桌甜点世界里的迷你女子 | L2 | 3950 |
 
 ### 悬疑与恐怖
 
@@ -162,6 +163,7 @@
 | --- | --- | --- | --- |
 | ★L459 | 韩国女生辣味挑战崩溃实录 | L2 | 4885 |
 | ★L461 | 酒店房间深夜关东煮试吃 | L2 | 3131 |
+| ★L716 | 迷你厨娘的巨型爆米花大作战 | L2 | 2134 |
 
 ### 制作与改造过程
 
@@ -211,14 +213,6 @@
 | ★Z21 | Frozen-Time Diner Breakfast Escape | 成片 | 2250 |
 | ★L598 | 过山车假发闹剧：冻结与倒放的第二次演练 | L2 | 2797 |
 | ★L599 | 复古餐厅时间冻结与倒放 | L2 | 2465 |
-
-### 未分类
-
-| 编号 | 标题 | 证据 | 长度 |
-| --- | --- | --- | --- |
-| ★L642 | 餐桌甜点世界里的迷你女子 | L2 | 3950 |
-| ★L663 | 未来街头时装七套造型变换 | L2 | 3522 |
-| ★L716 | 迷你厨娘的巨型爆米花大作战 | L2 | 2134 |
 
 ---
 
