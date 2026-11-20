@@ -94,13 +94,24 @@ def test_offline():
     good_fail = [r for r in good if r[0] == lp.FAIL]
     assert {"残留", "时间戳", "素材指派"} <= bad_fail, "lint 漏报了反例：%s" % bad_fail
     assert not good_fail, "lint 对正例误报：%s" % good_fail
-    nested = ("12 秒\n镜头01｜0—4 秒\n0—1.5 秒：他侧身。\n1.5—2.8 秒：他后撤。\n"
-              "2.8—4 秒：他撞上门框。\n镜头02｜4—12 秒\n[00:04-00:12] 两人扭打，抓衣领、摔向水面。\n"
-              "不要字幕。\n@图片1 定义男主。")
-    res, _, _ = lp.lint(nested, images=1)
-    assert not [r for r in res if r[0] == lp.FAIL], "嵌套时间线被误判：%s" % res
-    assert any("子时间线" in r[2] for r in res), "未识别嵌套时间线"
-    print("[通过] lint-prompt：残留/时间戳/标签/句式 + 嵌套时间线不误报")
+    # 真实稿件回归：fixtures 里每条都记录预期结论
+    import os
+    fix_dir = os.path.join(HERE, "fixtures")
+    expect = {
+        "english-annotations.txt": (0, set(), "英文机位注释不算占位符"),
+        "rework-duration.txt": (0, set(), "复刻稿里的「参考视频 30 秒」不当作声明时长"),
+        "nested-timeline.txt": (0, set(), "镜头内嵌套子时间线不报断档"),
+        "leftover-placeholder.txt": (1, {"残留"}, "模板说明与占位符必须报出来"),
+        "broken-timeline.txt": (2, {"时间戳"}, "断档与总时长不符各报一条"),
+    }
+    for name, (want_fail, cats, why) in expect.items():
+        body = open(os.path.join(fix_dir, name), encoding="utf-8").read()
+        res, _, _ = lp.lint(body, images=None)
+        got_cats = {r[1] for r in res if r[0] == lp.FAIL}
+        got = sum(1 for r in res if r[0] == lp.FAIL)
+        assert got >= want_fail and cats <= got_cats, \
+            "%s 预期 ≥%d 个 FAIL 且含 %s，实际 %d 个 %s" % (name, want_fail, cats, got, got_cats)
+        print("[通过] 回归 %-24s FAIL=%d  %s" % (name, got, why))
 
     # ---- 缺依赖时的行为 ----
     if ma.require_ffmpeg() is False:

@@ -1,0 +1,5 @@
+生成一条 15 秒、16:9 的行驶短片。
+镜头 01｜0—5 秒 [Slow Orbital + Detail]：车身从雨棚下驶出，水膜沿着车顶向后滑。
+镜头 02｜5—11 秒 [Rack Focus, shallow DOF]：焦点从雨刷移到车内仪表盘。
+镜头 03｜11—15 秒 [STYLE & QUALITY BOOSTER] [Tracking, still singing]：车尾灯拉出红色光斑。
+保持车身结构与漆面一致。不要字幕，不要 BGM。

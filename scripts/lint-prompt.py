@@ -6,13 +6,14 @@
 
 检查项：
   1 模板残留：使用说明、提示语、方括号占位符
-  2 时间戳：是否连续、有无断档或重叠、结束时间是否等于声明时长
+  2 时间戳：是否连续（1 秒内缝隙给警告、更大断档判失败）、结尾是否等于声明时长
   3 素材标签：编号是否从 1 连续、数量是否与实际上传数一致、有没有无依据的 @1 写法
   4 多素材指派：有没有用"分别是"句式（官方点名的失败写法）
   5 字段标题：是否还在用 【】，与画面字幕同符号
   6 负向约束：是否集中在结尾，而不是散在前半段
   7 空栏目：只剩字段名、没有内容的行
-  8 动作片（--action）：禁用静态词、动作动词粗估
+  8 台词：{} 内超过 30 字的句子（字幕与配音都容易出错）
+  9 动作片（--action）：禁用静态词、动作动词粗估
 
 用法：
     python lint-prompt.py draft.txt
@@ -47,7 +48,8 @@ def extract_ranges(text):
         found.append((a, b, m.group(0)))
 
     # 0-4s / 0—4 秒 / 8 秒到 11 秒；单位可以只写在后一个数字后
-    for m in re.finditer(r"(\d{1,3}(?:\.\d+)?)\s*(?:s|秒)?\s*[-–—~至]\s*(\d{1,3}(?:\.\d+)?)\s*(?:s|秒)", text):
+    for m in re.finditer(r"(\d{1,3}(?:\.\d+)?)\s*(?:s|秒)?\s*[-–—~至]\s*(\d{1,3}(?:\.\d+)?)\s*(?:s|秒)"
+                        r"(?!\s*(?:后|之后|以后|左右|以内|内))", text):
         a, b = float(m.group(1)), float(m.group(2))
         if b > a and b <= 1800:          # 排除 2008-2012 这类年份
             found.append((a, b, m.group(0)))
@@ -65,13 +67,32 @@ def extract_ranges(text):
     return uniq
 
 
+DUR_LABEL = r"(?:总时长|成片时长|全片时长|片长|时长|视频长度)"
+DUR_EXCLUDE = re.compile(r"(?:参考|原片|样片|素材|对比)\S{0,4}$")
+
+
 def declared_duration(text):
-    for pat in (r"(?:总时长|全片时长|成片时长|时长|片长)\s*[：:为]?\s*(\d+(?:\.\d+)?)\s*秒",
-                r"(\d+(?:\.\d+)?)\s*秒\s*的"):
+    """只认明确声明，不猜。宁可返回 None（只给 WARN），也不抓错数字触发 FAIL。"""
+    for m in re.finditer(DUR_LABEL + r"\s*[：:为]?\s*(\d+(?:\.\d+)?)\s*秒", text):
+        head = text[max(0, m.start() - 8):m.start()]
+        if DUR_EXCLUDE.search(head):
+            continue
+        return float(m.group(1)), m.group(0)
+    for pat in (r"(?:生成|做|制作|拍)一(?:条|支|个)\s*(\d+(?:\.\d+)?)\s*秒",
+                r"(?:本次|成片|目标|完成片)\s*(?:时长)?\s*[：:为]?\s*(\d+(?:\.\d+)?)\s*秒"):
         m = re.search(pat, text)
         if m:
             return float(m.group(1)), m.group(0)
-    m = re.search(r"(\d+(?:\.\d+)?)\s*秒", text)
+    # 兜底：取第一个未被"参考/原片/样片"修饰的 N 秒。开头通常就是规格行；
+    # 时间轴里的"8—15 秒"排在后面，不会被误当成总时长。
+    cands = [m for m in re.finditer(r"(\d+(?:\.\d+)?)\s*秒", text)
+             if not DUR_EXCLUDE.search(text[max(0, m.start() - 8):m.start()])]
+    if cands:
+        m = cands[0]
+        return float(m.group(1)), m.group(0)
+    # 英文稿："Create a 30-second, 16:9 ..." 这种开头写法。只认靠前的数字，
+    # 避免把正文里的 "hold for 2 seconds" 当成总时长。
+    m = re.search(r"(\d+(?:\.\d+)?)\s*[- ]?\s*(?:second|sec)s?\b", text[:120], re.I)
     if m:
         return float(m.group(1)), m.group(0)
     return None, None
@@ -92,6 +113,9 @@ def check_residue(text):
             # markdown 链接 [文字](地址) 不算占位符
             if text[m.end():m.end() + 1] == "(":
                 continue
+            # 不含中文的方括号视为英文机位/风格注释，例如 [Slow Orbital + Detail]
+            if not re.search(r"[\u4e00-\u9fff]", inner):
+                continue
             line = text[:m.start()].count("\n") + 1
             out.append((level, "残留", "%s（第 %d 行：%s）" % (msg, line, hit[:30])))
     if not any(r[1] == "残留" for r in out):
@@ -106,6 +130,10 @@ def check_timeline(text, duration):
         out.append((WARN, "时间戳", "未发现时间戳；单镜连续描述可忽略，多段结构应补"))
         return out
 
+    if len(ranges) == 1 and ranges[0][0] > 0.01:
+        out.append((WARN, "时间戳", "只识别到一段 %s 且不从 0 开始，可能是时长描述，已忽略" % ranges[0][2]))
+        return out
+
     total = len(ranges)
     maximal = [r for r in ranges
                if not any(o is not r and o[0] <= r[0] and r[1] <= o[1] and (o[1] - o[0]) > (r[1] - r[0])
@@ -117,11 +145,20 @@ def check_timeline(text, duration):
     if ranges[0][0] > 0.01:
         out.append((WARN, "时间戳", "首段从 %.1fs 开始，不是 0" % ranges[0][0]))
 
+    big, small = [], []
     for prev, cur in zip(ranges, ranges[1:]):
-        if cur[0] > prev[1] + 0.01:
-            out.append((FAIL, "时间戳", "断档：%.1fs → %.1fs（%s 与 %s 之间）" % (prev[1], cur[0], prev[2], cur[2])))
+        gap = cur[0] - prev[1]
+        if gap > 1.0:
+            big.append((prev, cur, gap))
+        elif gap > 0.01:
+            small.append((prev, cur))
         elif cur[0] < prev[1] - 0.01:
             out.append((WARN, "时间戳", "重叠：%s 与 %s" % (prev[2], cur[2])))
+    for prev, cur, gap in big:
+        out.append((FAIL, "时间戳", "断档 %.1fs：%s 之后接 %s" % (gap, prev[2], cur[2])))
+    if small:
+        sample = "、".join("%s→%s" % (p1[2], c1[2]) for p1, c1 in small[:2])
+        out.append((WARN, "时间戳", "%d 处 1 秒内的缝隙（%s），按平台要求应首尾相接" % (len(small), sample)))
 
     end = max(r[1] for r in ranges)
     if duration is None:
@@ -164,6 +201,21 @@ def check_labels(text, images):
     return out
 
 
+def check_dialogue(text):
+    out = []
+    long_lines = []
+    for m in re.finditer(r"\{([^{}]{1,300})\}", text):
+        s = m.group(1).strip()
+        if len(s) > 30:
+            long_lines.append((text[:m.start()].count("\n") + 1, len(s)))
+    if long_lines:
+        out.append((WARN, "台词", "%d 句超过 30 字（如第 %d 行 %d 字）；字幕与配音都容易出错，建议拆短"
+                    % (len(long_lines), long_lines[0][0], long_lines[0][1])))
+    else:
+        out.append((PASS, "台词", "无超长台词" if "{" in text else "无台词块"))
+    return out
+
+
 def check_headings(text):
     out = []
     if "【" in text or "】" in text:
@@ -190,8 +242,10 @@ def check_headings(text):
 def check_constraints(text):
     out = []
     lines = text.split("\n")
-    idx = [i for i, l in enumerate(lines)
-           if re.search(r"不要|禁止|避免|不得|不出现|无字幕|无 BGM|无BGM", l)]
+    # 中文交付稿为主，同时兼容英文稿的 no/avoid/without 写法
+    pat = re.compile(r"不要|禁止|避免|不得|不出现|无字幕|无 ?BGM|"
+                     r"\b(?:no|without|avoid|never|do not|don't)\b", re.I)
+    idx = [i for i, l in enumerate(lines) if pat.search(l)]
     if not idx:
         out.append((WARN, "负向约束", "没有找到负向约束句；确无需要可忽略"))
     else:
@@ -234,6 +288,7 @@ def lint(text, duration=None, images=None, action=False):
     results += check_timeline(text, duration)
     results += check_labels(text, images)
     results += check_headings(text)
+    results += check_dialogue(text)
     results += check_constraints(text)
     if action:
         results += check_action(text)

@@ -46,7 +46,7 @@ references/
 assets/
 ├── templates/                 19 份内容模板（18 类，舞蹈另有单人舞短版）+ 1 份舞蹈参考图提示词
 └── modifiers/                 5 组可叠加的画风与制作方法
-scripts/                       交付前校验（lint-prompt）、成片实测与离线测试
+scripts/                       交付前校验（lint-prompt）、成片实测、回归样本与离线测试
 archive/                       个人材料（旧偏好、作品案例、外部文稿），不属于技能内容
 ```
 
@@ -101,4 +101,6 @@ archive/                       个人材料（旧偏好、作品案例、外部�
 - 新增或扩展外部方法时，同次更新对应分册与 `THIRD-PARTY-NOTICES.md` 的来源行，注明已读范围、采用方法与验证状态。
 - 脚本改动后先跑 `python scripts/test_scripts.py`（离线，无需 ffmpeg）；装了 ffmpeg 后跑
   `motion-audit.py --selftest` / `fight-metrics.py --selftest` 做端到端验证，`lint-prompt.py --selftest` 随时可跑。
+- `scripts/fixtures/` 是回归样本（英文机位注释、复刻稿时长、嵌套时间线、模板残留、断档）。
+  改 lint 的判定规则前后都要跑一遍测试；新踩到的误报也补成 fixture，别再靠记忆防回归。
 - 个人案例与偏好放在 `archive/`，不要写回技能本体；这是自用技能，不追求公开发布所需的完备性。
