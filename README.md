@@ -15,46 +15,49 @@
 ## 目录结构
 
 ```text
-README.md
-THIRD-PARTY-NOTICES.md          来源、许可与平台口径出处
-archive/                        个人材料的本地归档，不随技能分发
-skills/video-prompt-director/   技能本体，可单独复制分发
-├── SKILL.md                    入口：路由表、创作流程、动作两道关、边界
-├── references/
-│   ├── defaults.md             默认约定（语言、画幅、字段写法、成本），可被本次要求覆盖
-│   ├── video-types.md          18 类内容与模板入口
-│   ├── video-core.md           多类型共用写法
-│   ├── creative-divergence.md  创意发散与方案淘汰
-│   ├── directing.md            观看终点、视觉主意、镜头决策
-│   ├── cinematography.md       构图、光影、运动与画面强度
-│   ├── pacing.md               动作密度与幅度、四条硬写法、成片判据
-│   ├── action-craft.md         七拍动作链、受力四通道、空间调度、动作容量
-│   ├── camera-feasibility.md   机位可行性、遮挡转场、冲击预算、两条产线
-│   ├── impact-frames.md        冲击帧、闪白、反相与闪黑
-│   ├── platform-notes.md       平台规格与语法，逐条标证据等级
-│   ├── prompt-self-check.md    交付前逐段推演与修正
-│   ├── video-reverse-engineering.md  参考视频反推、换人复用
-│   ├── life-scenes.md / dance-*.md    分类型方法
-│   ├── feedback.md             成片反馈与维护流程
-│   ├── external-methods.md / external-cases.md  外部方法提炼与来源
-│   └── external-library/
-│       ├── index.md            ★ 条目速查（按题材定位锚点）
-│       ├── samples-*.md        66 条 ★ 提示词全文（写作锚点）
-│       ├── catalog.md          852 条全量目录（★ 不够用时再查）
-│       ├── structural-rules.md 结构规则总则与分册目录
-│       └── structures/         按题材分册的结构块、指导与陷阱
-├── assets/templates/           19 份内容模板（18 类，舞蹈另有单人舞短版）+ 1 份舞蹈参考图提示词
-├── assets/modifiers/           5 组可叠加的画风与制作方法
-└── scripts/                    成片实测脚本与离线测试
+SKILL.md                       技能入口（客户端从这里读）
+README.md                      本文件
+THIRD-PARTY-NOTICES.md         来源、许可与平台口径出处
+references/
+├── defaults.md                默认约定（语言、画幅、字段写法、成本），可被本次要求覆盖
+├── video-types.md             18 类内容与模板入口
+├── video-core.md              多类型共用写法
+├── creative-divergence.md     创意发散与方案淘汰
+├── directing.md               观看终点、视觉主意、镜头决策
+├── cinematography.md          构图、光影、运动与画面强度
+├── pacing.md                  动作密度与幅度、四条硬写法、成片判据
+├── action-craft.md            七拍动作链、受力四通道、空间调度、动作容量
+├── camera-feasibility.md      机位可行性、遮挡转场、冲击预算、两条产线
+├── impact-frames.md           冲击帧、闪白、反相与闪黑
+├── platform-notes.md          平台规格与语法，逐条标证据等级
+├── prompt-self-check.md       交付前逐段推演与修正
+├── video-reverse-engineering.md  参考视频反推、换人复用
+├── life-scenes.md / dance-*.md   分类型方法
+├── feedback.md                成片反馈与维护流程
+├── external-methods.md / external-cases.md  外部方法提炼与来源
+└── external-library/
+    ├── index.md               ★ 条目速查（按题材定位锚点）
+    ├── samples-*.md           66 条 ★ 提示词全文（写作锚点）
+    ├── catalog.md             852 条全量目录（★ 不够用时再查）
+    ├── structural-rules.md    结构规则总则与分册目录
+    └── structures/            按题材分册的结构块、指导与陷阱
+assets/
+├── templates/                 19 份内容模板（18 类，舞蹈另有单人舞短版）+ 1 份舞蹈参考图提示词
+└── modifiers/                 5 组可叠加的画风与制作方法
+scripts/                       成片实测脚本与离线测试
+archive/                       个人材料（旧偏好、作品案例、外部文稿），不属于技能内容
 ```
 
 ## 安装
 
-技能就是一个带 `SKILL.md` 的目录，任何支持 Agent Skills 约定的客户端都能用：
+**仓库根目录就是技能目录**，`SKILL.md` 在根上——一键安装器只读根目录 `SKILL.md` 的那种也能直接识别。
 
-1. 复制 `skills/video-prompt-director/` 整个目录到你的客户端技能目录，**不要连外层目录一起套**。
+1. 把整个仓库放进客户端的技能目录，并命名成 `video-prompt-director`
+   （`git clone <仓库地址> ~/.claude/skills/video-prompt-director`，或解压后把目录改名）。
 2. 最终路径应形如 `<技能目录>/video-prompt-director/SKILL.md`。
 3. 重启客户端或刷新技能列表，确认技能名出现。
+
+若安装器要求"仓库根即技能根"（不少市场和一键安装脚本是这么做的），本仓库已经满足，无需再套一层目录。
 
 常见客户端的默认技能目录（以你自己的客户端文档为准）：
 
@@ -64,8 +67,8 @@ skills/video-prompt-director/   技能本体，可单独复制分发
 | WorkBuddy | `~/.workbuddy/skills/` |
 | Codex 类环境 | `~/.codex/skills/`（设置了 `CODEX_HOME` 时用其 `skills` 子目录） |
 
-只想一人一机本地使用时，把整个仓库放在任意位置，让客户端指向 `skills/video-prompt-director` 即可；
-仓库里的 `archive/` 不参与运行。
+`archive/` 是个人材料，不属于技能内容，安装时可以不拷；技能只依赖根目录 `SKILL.md` 与
+`references/`、`assets/`、`scripts/`。
 
 ## 使用
 
@@ -94,6 +97,6 @@ skills/video-prompt-director/   技能本体，可单独复制分发
 
 - 方法按"共用 → 类型 → 题材"分层，入口保持短，按需读取；新增类型以真实请求与具体案例为依据。
 - 新增或扩展外部方法时，同次更新对应分册与 `THIRD-PARTY-NOTICES.md` 的来源行，注明已读范围、采用方法与验证状态。
-- 脚本改动后先跑 `python skills/video-prompt-director/scripts/test_scripts.py`（离线，无需 ffmpeg）；
+- 脚本改动后先跑 `python scripts/test_scripts.py`（离线，无需 ffmpeg）；
   装了 ffmpeg 后跑各自的 `--selftest` 做端到端验证。
 - 个人案例与偏好放在 `archive/`，不要写回技能本体；这是自用技能，不追求公开发布所需的完备性。
