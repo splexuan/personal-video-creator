@@ -1,4 +1,4 @@
-# 视频提示词导演（video-prompt-director）
+# 个人视频创作指南（personal-video-creator）
 
 一个自用、与朋友共用的视频提示词创作技能：把一句话想法、角色或产品素材、音频、脚本或参考视频，做成可直接投喂文生视频模型的完整提示词。
 不绑定任何具体的 Agent 客户端，也不绑定某个模型厂商——素材语法与上限按当前入口核对。
@@ -52,9 +52,9 @@ archive/                       个人材料（旧偏好、作品案例、外部�
 
 **仓库根目录就是技能目录**，`SKILL.md` 在根上——一键安装器只读根目录 `SKILL.md` 的那种也能直接识别。
 
-1. 把整个仓库放进客户端的技能目录，并命名成 `video-prompt-director`
-   （`git clone <仓库地址> ~/.claude/skills/video-prompt-director`，或解压后把目录改名）。
-2. 最终路径应形如 `<技能目录>/video-prompt-director/SKILL.md`。
+1. 把整个仓库放进客户端的技能目录，目录名保持 `personal-video-creator`
+   （`git clone <仓库地址> ~/.claude/skills/personal-video-creator`，或解压后直接放进去，不用改名）。
+2. 最终路径应形如 `<技能目录>/personal-video-creator/SKILL.md`。
 3. 重启客户端或刷新技能列表，确认技能名出现。
 
 若安装器要求"仓库根即技能根"（不少市场和一键安装脚本是这么做的），本仓库已经满足，无需再套一层目录。
