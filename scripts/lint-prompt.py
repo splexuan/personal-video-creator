@@ -9,11 +9,14 @@
   2 时间戳：是否连续（1 秒内缝隙给警告、更大断档判失败）、结尾是否等于声明时长
   3 素材标签：编号是否从 1 连续、数量是否与实际上传数一致、有没有无依据的 @1 写法
   4 多素材指派：有没有用"分别是"句式（官方点名的失败写法）
-  5 字段标题：是否还在用 【】，与画面字幕同符号
-  6 负向约束：是否集中在结尾，而不是散在前半段
+  5 字段标题：字段名是否还在用 【】（与画面字幕同符号；会先区分字段与字幕）
+  6 画面字幕：【】 字幕是否过长（句中字数越多越容易多字、错字）
   7 空栏目：只剩字段名、没有内容的行
   8 台词：{} 内超过 30 字的句子（字幕与配音都容易出错）
-  9 动作片（--action）：禁用静态词、动作动词粗估
+  9 负向约束：是否集中在结尾，而不是散在前半段
+ 10 约束冲突：写了"不要字幕／不要台词／不要音乐"，正文里却还有对应内容
+ 11 平台上限：时长是否落在 4–30 秒、参考图是否超过 30 张（推荐 1–8）、视频/音频是否超过 10 段
+ 12 动作片（--action）：禁用静态词、动作动词粗估
 
 用法：
     python lint-prompt.py draft.txt
@@ -216,13 +219,68 @@ def check_dialogue(text):
     return out
 
 
+# 字段名常见词，用来把【人物锁定】这类标题与【第一章：回家】这类画面字幕区分开
+FIELD_WORDS = re.compile(
+    r"^(?:人物|角色|主体|主角|配角|场景|环境|空间|地点|画面|构图|镜头|分镜|景别|机位|视角|"
+    r"光线|光影|摄影|运镜|风格|画风|色调|制作|素材|参考|道具|服装|造型|妆发|妆容|表演|情绪|"
+    r"表情|台词|对白|字幕|文字|声音|音效|音乐|配乐|节奏|剪辑|转场|开场|结尾|目标|卖点|品牌|"
+    r"布局|交互|界面|步骤|阶段|材料|结果|时长|格式|规格|比例|画幅|约束|负向|说明|要求|故事|"
+    r"叙事|动作|事件|规则|世界观|氛围|质感|特效|整体|视觉|生成|提示词|概述|概览|关键|细节|"
+    r"补充|输出|内容|任务|需求|限制|参数|时间线|设定|首帧|尾帧|分镜脚本|镜头语言)")
+# 章节号、带冒号的字标一律按画面字幕理解
+SUB_MARK = re.compile(r"[：:]|^第[一二三四五六七八九十百零\d]+[章节幕集部篇段]")
+
+
+def line_of(text, pos):
+    return text[:pos].count("\n") + 1
+
+
+def split_brackets(text):
+    """把 【…】 区分为字段标题与画面字幕，返回 (headings, subtitles)，元素为 (行号, 内容)。
+
+    判定顺序：带冒号或章节号的算字幕 → 命中字段词表的算标题 →
+    整篇有 3 处以上独立 【】 的按外部模板的字段标题处理（单条字幕很少成组出现）→ 其余算字幕。
+    """
+    items = []
+    for m in re.finditer(r"【([^】\n]{1,40})】", text):
+        inner = m.group(1).strip()
+        start = text.rfind("\n", 0, m.start()) + 1
+        end = text.find("\n", m.end())
+        if end == -1:
+            end = len(text)
+        line = text[start:end]
+        standalone = re.fullmatch(r"\s*【[^】\n]{1,40}】\s*", line) is not None
+        items.append((line_of(text, m.start()), inner, standalone))
+
+    n_standalone = sum(1 for it in items if it[2])
+    headings, subtitles = [], []
+    for ln, inner, standalone in items:
+        if SUB_MARK.search(inner) or not standalone:
+            subtitles.append((ln, inner))
+        elif FIELD_WORDS.match(inner) or n_standalone >= 3:
+            headings.append((ln, inner))
+        else:
+            subtitles.append((ln, inner))
+    return headings, subtitles
+
+
 def check_headings(text):
     out = []
-    if "【" in text or "】" in text:
-        n = text.count("【")
-        out.append((WARN, "字段标题", "仍有 %d 处 【】；它与画面字幕同符号，建议改 ▍字段" % n))
+    headings, subtitles = split_brackets(text)
+    if headings:
+        out.append((WARN, "字段标题", "%d 处字段标题仍在用 【】：%s；它与画面字幕同符号，建议改 ▍字段"
+                    % (len(headings), "、".join("第%d行「%s」" % h for h in headings[:3]))))
     else:
-        out.append((PASS, "字段标题", "未使用 【】"))
+        out.append((PASS, "字段标题", "字段没用 【】 做标题" if "【" not in text else "【】 只出现在画面字幕里"))
+    if subtitles:
+        longest = max(subtitles, key=lambda x: len(x[1]))
+        if len(longest[1]) > 20:
+            out.append((WARN, "画面字幕", "%d 处画面字幕，最长 %d 字（第 %d 行「%s」）；句中越长越容易多字或错字，建议拆短或改成画面可读"
+                        % (len(subtitles), len(longest[1]), longest[0], longest[1][:18])))
+        else:
+            out.append((PASS, "画面字幕", "%d 处画面字幕，最长 %d 字" % (len(subtitles), len(longest[1]))))
+    else:
+        out.append((PASS, "画面字幕", "无画面字幕"))
     lines = text.split("\n")
     field = re.compile(r"^\s*[^\s：:#\-*>|▍]{1,14}\s*[：:]\s*$")
     empty = []
@@ -254,6 +312,85 @@ def check_constraints(text):
             out.append((WARN, "负向约束", "约束句最早出现在 %.0f%% 处、最晚 %.0f%%，建议集中到结尾" % ((idx[0] + 1) * 100 / len(lines), ratio * 100)))
         else:
             out.append((PASS, "负向约束", "%d 处，集中在结尾" % len(idx)))
+    return out
+
+
+NEG_RULES = (
+    ("字幕", r"(?:不要|禁止|不出现|不加|避免|没有|无)\s*(?:任何)?\s*字幕",
+     r"\b(?:no|without)\s+(?:subtitles?|captions?)\b"),
+    ("台词", r"(?:不要|禁止|不出现|避免|没有|无)\s*(?:任何)?\s*(?:台词|对白|口白)",
+     r"\b(?:no|without)\s+(?:dialogue|lines|speech)\b"),
+    ("音乐", r"(?:不要|禁止|不出现|避免|没有|无)\s*(?:任何)?\s*(?:音乐|配乐|BGM|背景音乐)",
+     r"\b(?:no|without)\s+(?:music|bgm|score|soundtrack)\b"),
+)
+
+MUSIC_CONTENT = re.compile(
+    r"[（(][^）)\n]{0,24}(?:音乐|配乐|BGM|bgm|钢琴|旋律|鼓点|节拍)[^）)\n]{0,24}[）)]"
+    r"|(?:背景音乐|配乐|BGM|bgm)\s*(?:响起|渐入|淡出|铺底|贯穿)")
+DIALOGUE = re.compile(r"\{([^{}]{1,300})\}")
+
+
+def check_conflict(text):
+    """负向约束与正文内容对撞：写了"不要字幕"却仍有字幕，是交付事故，判 FAIL。"""
+    out = []
+    headings, subtitles = split_brackets(text)
+    dialogues = [m.group(1).strip() for m in DIALOGUE.finditer(text) if m.group(1).strip()]
+    music = MUSIC_CONTENT.findall(text)
+    evidence = {
+        "字幕": (subtitles, "画面字幕"),
+        "台词": (dialogues, "台词块 {}"),
+        "音乐": (music, "音乐描述"),
+    }
+    hits = []
+    for name, cn, en in NEG_RULES:
+        m = re.search(cn, text) or re.search(en, text, re.I)
+        if not m:
+            continue
+        items, label = evidence[name]
+        if not items:
+            continue
+        first = items[0]
+        loc = ("第 %d 行「%s」" % (first[0], first[1][:16])) if isinstance(first, tuple) else "「%s」" % str(first)[:16]
+        hits.append((FAIL, "约束冲突", "写了「%s」，正文却仍有 %d 处%s（%s）；两者只能留一个"
+                     % (m.group(0).strip(), len(items), label, loc)))
+    if hits:
+        out.extend(hits)
+    else:
+        out.append((PASS, "约束冲突", "负向约束与正文内容不冲突"))
+    return out
+
+
+def check_limits(text, duration, images):
+    """平台硬上限：种子口径为单次 4–30 秒、图 30 张（推荐 1–8）、视频/音频各 10 段。"""
+    out = []
+    if duration is not None:
+        if duration < 4:
+            out.append((WARN, "平台上限", "声明 %.1f 秒低于单次最短 4 秒（Seedance 口径）；他入口按实际界面核对" % duration))
+        elif duration > 30:
+            out.append((WARN, "平台上限", "声明 %.1f 秒超出单次 4–30 秒；若用长视频模式（30–180 秒）或他入口可忽略" % duration))
+        else:
+            out.append((PASS, "平台上限", "时长 %.1f 秒在 4–30 秒区间内（Seedance 口径）" % duration))
+    if images is not None:
+        if images > 30:
+            out.append((FAIL, "平台上限", "参考图 %d 张超过上限 30 张" % images))
+        elif images > 8:
+            out.append((WARN, "平台上限", "参考图 %d 张超出推荐 1–8 张的稳定区间" % images))
+        else:
+            out.append((PASS, "平台上限", "参考图 %d 张在推荐区间内" % images))
+
+    pat = re.compile(r"@\s*(视频|Video|音频|Audio)\s*(\d+)", re.I)
+    buckets = {}
+    for m in pat.finditer(text):
+        buckets.setdefault(m.group(1).lower(), set()).add(int(m.group(2)))
+    vids = buckets.get("视频", set()) | buckets.get("video", set())
+    auds = buckets.get("音频", set()) | buckets.get("audio", set())
+    for label, s in (("视频", vids), ("音频", auds)):
+        if len(s) > 10:
+            out.append((FAIL, "平台上限", "%s素材 %d 段超过上限 10 段" % (label, len(s))))
+
+    m = re.search(r"(\d{1,3})\s*(?:格|宫格|格栅)", text)
+    if m and int(m.group(1)) > 15:
+        out.append((WARN, "平台上限", "分镜栅格 %s 格，建议 <15 格（用线稿或火柴人）" % m.group(1)))
     return out
 
 
@@ -290,6 +427,8 @@ def lint(text, duration=None, images=None, action=False):
     results += check_headings(text)
     results += check_dialogue(text)
     results += check_constraints(text)
+    results += check_conflict(text)
+    results += check_limits(text, duration, images)
     if action:
         results += check_action(text)
     return results, declared, raw
@@ -336,6 +475,19 @@ GOOD = """▍格式
 保持两人面部结构与服装一致。不要字幕，不要 BGM。
 """
 
+CONFLICT = """总时长 12 秒，9:16 竖屏。
+▍时间
+[00:00-00:04] 她拎着袋子进门。
+[00:04-00:08] 她蹲下捡菜。
+[00:08-00:12] 她走向客厅。
+▍字幕
+【第一章：回家】
+▍台词
+{我回来了。}
+▍约束
+不要字幕，不要台词，不要 BGM。
+"""
+
 
 def selftest():
     ok = True
@@ -349,8 +501,18 @@ def selftest():
             print("[失败] 反例没报出 %s" % need); ok = False
     if good_f:
         print("[失败] 正例报出 FAIL：%s" % good_f); ok = False
+    # 约束冲突：写"不要字幕/不要台词"却留着字幕与台词
+    conf, _, _ = lint(CONFLICT)
+    conf_f = [r for r in conf if r[0] == FAIL]
+    if {r[1] for r in conf_f} != {"约束冲突"} or len(conf_f) != 2:
+        print("[失败] 约束冲突应报 2 条 FAIL，实际：%s" % conf_f); ok = False
+    # 合法画面字幕不能被当成字段标题
+    warn_cats = {r[1] for r in lint("【第一章：回家】\n{你好。}\n")[0] if r[0] == WARN}
+    if "字段标题" in warn_cats:
+        print("[失败] 合法画面字幕仍被当成字段标题"); ok = False
     if ok:
         print("[通过] 反例命中 %d 个 FAIL（%s）；正例 0 FAIL" % (len(bad_f), "、".join(sorted(cats))))
+        print("[通过] 约束冲突报 2 条；字段标题与画面字幕已区分")
         print("[提示] 正例剩余 WARN：%s" % ([r[2] for r in good if r[0] == WARN] or "无"))
     return 0 if ok else 1
 

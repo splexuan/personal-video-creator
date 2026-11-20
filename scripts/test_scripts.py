@@ -97,21 +97,33 @@ def test_offline():
     # 真实稿件回归：fixtures 里每条都记录预期结论
     import os
     fix_dir = os.path.join(HERE, "fixtures")
+    # (images, 预期 FAIL 数, 必含 FAIL 类别, 必含 WARN 类别, 说明)
     expect = {
-        "english-annotations.txt": (0, set(), "英文机位注释不算占位符"),
-        "rework-duration.txt": (0, set(), "复刻稿里的「参考视频 30 秒」不当作声明时长"),
-        "nested-timeline.txt": (0, set(), "镜头内嵌套子时间线不报断档"),
-        "leftover-placeholder.txt": (1, {"残留"}, "模板说明与占位符必须报出来"),
-        "broken-timeline.txt": (2, {"时间戳"}, "断档与总时长不符各报一条"),
+        "english-annotations.txt": (None, 0, set(), set(), "英文机位注释不算占位符"),
+        "rework-duration.txt": (None, 0, set(), set(), "复刻稿里的「参考视频 30 秒」不当作声明时长"),
+        "nested-timeline.txt": (None, 0, set(), set(), "镜头内嵌套子时间线不报断档"),
+        "leftover-placeholder.txt": (None, 7, {"残留"}, {"时间戳", "负向约束"}, "模板说明与占位符必须报出来"),
+        "broken-timeline.txt": (None, 2, {"时间戳"}, set(), "断档与总时长不符各报一条"),
+        "zh-subtitle.txt": (1, 0, set(), set(), "合法画面字幕不算字段标题、不与约束冲突"),
+        "conflict-subtitle.txt": (None, 1, {"约束冲突"}, set(), "「不要字幕」与正文【】字幕必须对撞"),
+        "conflict-dialogue-music.txt": (None, 2, {"约束冲突"}, set(), "「不要台词／不要音乐」与正文内容必须对撞"),
+        "over-long-duration.txt": (None, 0, set(), {"平台上限"}, "45 秒超出单次 4–30 秒给警告"),
     }
-    for name, (want_fail, cats, why) in expect.items():
+    for name, (imgs, want_fail, cats, warns, why) in expect.items():
         body = open(os.path.join(fix_dir, name), encoding="utf-8").read()
-        res, _, _ = lp.lint(body, images=None)
+        res, _, _ = lp.lint(body, images=imgs)
         got_cats = {r[1] for r in res if r[0] == lp.FAIL}
+        got_warns = {r[1] for r in res if r[0] == lp.WARN}
         got = sum(1 for r in res if r[0] == lp.FAIL)
-        assert got >= want_fail and cats <= got_cats, \
-            "%s 预期 ≥%d 个 FAIL 且含 %s，实际 %d 个 %s" % (name, want_fail, cats, got, got_cats)
-        print("[通过] 回归 %-24s FAIL=%d  %s" % (name, got, why))
+        assert got == want_fail and cats <= got_cats and warns <= got_warns, \
+            "%s 预期 FAIL=%d 含 %s、WARN 含 %s，实际 FAIL=%d %s / WARN %s" % (
+                name, want_fail, cats, warns, got, got_cats, got_warns)
+        print("[通过] 回归 %-26s FAIL=%d  %s" % (name, got, why))
+
+    # 参考图超过上限 30 张必须判 FAIL
+    over, _, _ = lp.lint("@图片1 男主。@图片2 女主。12 秒。不要字幕。", images=40)
+    assert any(r[0] == lp.FAIL and r[1] == "平台上限" for r in over), "参考图 40 张未报 FAIL"
+    print("[通过] 回归 参考图 40 张              FAIL=1  超上限必须拦下")
 
     # ---- 缺依赖时的行为 ----
     if ma.require_ffmpeg() is False:
