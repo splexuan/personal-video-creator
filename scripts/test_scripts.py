@@ -174,6 +174,15 @@ def test_offline():
         assert all(isinstance(x, str) and x.strip() for x in e["expectations"]), "%s 有空的 expectation" % e["id"]
     print("[通过] evals：%d 条，id 唯一、stage 1-6、每条 ≥3 条可判定期望" % len(ids))
 
+    # ---- 仓库结构自检 ----
+    cr = load("check-repo")
+    files = cr.md_files()
+    cr.check_frontmatter(); cr.check_links(files); cr.check_inline_paths(files)
+    cr.check_orphans(files); cr.check_counts()
+    hard = [r for r in cr.RESULTS if r[0] == cr.FAIL]
+    assert not hard, "仓库自检失败：%s" % hard
+    print("[通过] 仓库自检：frontmatter、链接与锚点、反引号路径、死文件、数量声明")
+
     # ---- 缺依赖时的行为 ----
     if ma.require_ffmpeg() is False:
         print("[通过] 缺失 ffmpeg 时给出安装指引而不是抛异常")
