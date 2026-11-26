@@ -147,6 +147,22 @@ def test_offline():
     assert sum(int(x) for x in re.findall(r"\| \d+ \| (\d+) \| `samples", idx)) == 852, "index 候选总数合计不是 852"
     print("[通过] 目录一致性：852 条、66 条 ★、分类计数与索引一致")
 
+    # ---- evals 结构 ----
+    import json
+    ev = json.load(open(os.path.join(os.path.dirname(HERE), "evals", "evals.json"), encoding="utf-8"))
+    skill_md = open(os.path.join(os.path.dirname(HERE), "SKILL.md"), encoding="utf-8").read()
+    assert ev["skill_name"] in skill_md, "evals 的 skill_name 与 SKILL.md 不一致"
+    ids = [e["id"] for e in ev["evals"]]
+    assert len(ids) == len(set(ids)), "评测 id 有重复：%s" % ids
+    assert len(ids) >= 8, "评测条目过少：%d" % len(ids)
+    for e in ev["evals"]:
+        assert re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", e["id"]), "id 不是 kebab-case：%s" % e["id"]
+        assert 1 <= int(e["stage"]) <= 6, "%s 的 stage 越界" % e["id"]
+        assert e["prompt"].strip() and e["expected_output"].strip(), "%s 缺 prompt/expected_output" % e["id"]
+        assert len(e["expectations"]) >= 3, "%s 的 expectations 少于 3 条" % e["id"]
+        assert all(isinstance(x, str) and x.strip() for x in e["expectations"]), "%s 有空的 expectation" % e["id"]
+    print("[通过] evals：%d 条，id 唯一、stage 1-6、每条 ≥3 条可判定期望" % len(ids))
+
     # ---- 缺依赖时的行为 ----
     if ma.require_ffmpeg() is False:
         print("[通过] 缺失 ffmpeg 时给出安装指引而不是抛异常")
