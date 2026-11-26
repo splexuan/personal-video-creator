@@ -135,6 +135,10 @@ def test_offline():
                         images=1)
     warns = {r[1] for r in res if r[0] == lp.WARN}
     assert "运镜" in warns, "一句多运镜未告警"
+    res, _, _ = lp.lint(open(os.path.join(fix_dir, "compound-move.txt"), encoding="utf-8").read(), images=0)
+    assert "运镜" in {r[1] for r in res if r[0] == lp.WARN}, "「横移并后拉」这类复合运镜未告警"
+    res, _, _ = lp.lint(open(os.path.join(fix_dir, "no-aspect.txt"), encoding="utf-8").read(), images=0)
+    assert "画幅" in {r[1] for r in res if r[0] == lp.WARN}, "缺画幅未告警"
     print("[通过] 定向回归：缺单元总数、一句多运镜都能报出")
 
     # ---- 目录一致性：catalog 与 index 的条数、★ 数必须对得上 ----

@@ -423,7 +423,16 @@ def check_action(text):
 
 
 MOVES = re.compile(r"推进|推近|推轨|拉远|后拉|摇镜|横移|平移|环绕|跟拍|跟摇|升降|变焦|航拍|俯冲|甩镜")
-CONNECT = re.compile(r"同时|一边|一面|以及|并[同且行]|再加")
+CONNECT = re.compile(r"同时|一边|一面|以及|并|再加")
+
+
+ASPECT = re.compile(r"\b\d{1,2}:\d{1,2}\b|竖屏|横屏|竖向|横向|方形画幅")
+
+
+def check_format(text):
+    if ASPECT.search(text):
+        return [(PASS, "画幅", "已声明画幅或方向")]
+    return [(WARN, "画幅", "没有写画幅（16:9 / 9:16 / 1:1 …）或方向；入口会按默认值出图")]
 
 
 def check_camera(text):
@@ -454,6 +463,7 @@ def lint(text, duration=None, images=None, action=False):
     results += check_constraints(text)
     results += check_conflict(text)
     results += check_limits(text, duration, images)
+    results += check_format(text)
     results += check_camera(text)
     if action:
         results += check_action(text)
