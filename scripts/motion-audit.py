@@ -180,11 +180,20 @@ def audit(video, threshold=None, ratio=0.333, event=None):
         return 1
 
     values = [v for _, v in series]
-    mean = sum(values) / len(values)
-    med = statistics.median(values)
-    ordered = sorted(values)
-    p10 = ordered[len(values) // 10]
-    p90 = ordered[len(values) * 9 // 10]
+    # 单帧尖峰＝切镜或闪帧：两侧帧都很低，只有这一帧暴涨。计阈值与峰值前先剔掉，
+    # 否则切镜会被当成"运动最高点"，把重音判定和近静止判定一起带偏。
+    med_all = statistics.median(values)
+    cuts = set()
+    for i in range(1, len(values) - 1):
+        v = values[i]
+        if v > max(med_all * 6, 25) and min(values[i - 1], values[i + 1]) < v / 4:
+            cuts.add(i)
+    clean = [v for i, v in enumerate(values) if i not in cuts]
+    mean = sum(clean) / len(clean)
+    med = statistics.median(clean)
+    ordered = sorted(clean)
+    p10 = ordered[len(clean) // 10]
+    p90 = ordered[len(clean) * 9 // 10]
     cut = threshold if threshold is not None else mean * ratio
 
     print()
@@ -193,10 +202,15 @@ def audit(video, threshold=None, ratio=0.333, event=None):
     print("近静止判定阈值：%.2f  (= 均值 x %.3f%s)"
           % (cut, ratio, "，已由 --threshold 覆盖" if threshold is not None else ""))
     print("口径：经验阈值，随分辨率与帧率漂移；用于排序与定位，不做跨片绝对比较。")
+    if cuts:
+        print("检测到 %d 处切镜/闪帧（%s），已从均值、阈值与最高点判定中排除。"
+              % (len(cuts), "、".join("%.2fs" % series[i][0] for i in sorted(cuts))))
     print()
 
     secs = {}
-    for t, v in series:
+    for i, (t, v) in enumerate(series):
+        if i in cuts:
+            continue
         secs.setdefault(int(t), []).append(v)
     print("秒  |  均值 |  峰值 | 直方（每 # = 0.5 单位）")
     for s in sorted(secs):
@@ -208,7 +222,9 @@ def audit(video, threshold=None, ratio=0.333, event=None):
     best = (0, 0.0, 0.0)
     run_len = 0
     start = 0.0
-    for t, v in series:
+    for i, (t, v) in enumerate(series):
+        if i in cuts:
+            continue
         if v < cut:
             if run_len == 0:
                 start = t
@@ -218,7 +234,8 @@ def audit(video, threshold=None, ratio=0.333, event=None):
         else:
             run_len = 0
 
-    peak_t, peak_v = max(series, key=lambda x: x[1])
+    peak_t, peak_v = max(((t, v) for i, (t, v) in enumerate(series) if i not in cuts),
+                         key=lambda x: x[1])
 
     print()
     print("-" * 62)
