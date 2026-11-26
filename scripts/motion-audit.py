@@ -6,10 +6,10 @@ motion-audit.py —— 成片运动密度客观测量
 用途：判断一条"本该一直在动"的短片（打斗、追逐、群战）是否节奏失败。
 对应方法：references/pacing.md 第七节（成片实测）。
 
-依赖：ffmpeg / ffprobe 需在 PATH 中。本脚本只用标准库。
+依赖：ffmpeg 需在 PATH 中；有 ffprobe 更准，没有时自动退回解析 ffmpeg -i 的输出。
 
 用法：
-    python motion-audit.py <video.mp4> [--threshold 1.5] [--ratio 0.333]
+    python motion-audit.py <video.mp4> [--threshold 1.5] [--ratio 0.333] [--event 7-9]
     python motion-audit.py --selftest          # 用合成片自检整条链路
 
 输出：
@@ -37,7 +37,7 @@ import tempfile
 
 
 def require_ffmpeg():
-    missing = [b for b in ("ffmpeg", "ffprobe") if shutil.which(b) is None]
+    missing = [b for b in ("ffmpeg",) if shutil.which(b) is None]
     if missing:
         print("缺少依赖：%s 不在 PATH 中。" % "、".join(missing))
         print("安装 ffmpeg 后再试（macOS: brew install ffmpeg；Windows: winget install ffmpeg；")
@@ -60,16 +60,29 @@ def run(cmd, cwd=None):
 
 
 def probe(video):
-    out = run(["ffprobe", "-v", "error",
-               "-select_streams", "v:0",
-               "-show_entries", "format=duration",
-               "-show_entries", "stream=width,height,r_frame_rate,nb_frames",
-               "-of", "default=noprint_wrappers=1", video])
+    """优先 ffprobe；没有 ffprobe（剪映等只带 ffmpeg）时退回解析 ffmpeg -i 的输出。"""
     info = {}
-    for line in out.splitlines():
-        if "=" in line:
-            k, v = line.split("=", 1)
-            info[k.strip()] = v.strip()
+    if shutil.which("ffprobe"):
+        out = run(["ffprobe", "-v", "error",
+                   "-select_streams", "v:0",
+                   "-show_entries", "format=duration",
+                   "-show_entries", "stream=width,height,r_frame_rate,nb_frames",
+                   "-of", "default=noprint_wrappers=1", video])
+        for line in out.splitlines():
+            if "=" in line:
+                k, v = line.split("=", 1)
+                info[k.strip()] = v.strip()
+    if not info.get("width"):
+        out = run(["ffmpeg", "-hide_banner", "-i", video])
+        m = re.search(r"Duration:\s*(\d+):(\d+):(\d+(?:\.\d+)?)", out)
+        if m:
+            info["duration"] = str(int(m.group(1)) * 3600 + int(m.group(2)) * 60 + float(m.group(3)))
+        m = re.search(r",\s*(\d{2,5})x(\d{2,5})[\s,\[]", out)
+        if m:
+            info["width"], info["height"] = m.group(1), m.group(2)
+        m = re.search(r"(\d+(?:\.\d+)?)\s*fps", out)
+        if m:
+            info["r_frame_rate"] = m.group(1) + "/1"
     return info
 
 
@@ -99,11 +112,14 @@ def motion_series(video):
 
 
 def duplicate_check(video):
-    """用 mpdecimate 判断是否存在被复制的近重复帧。"""
+    """用 mpdecimate 判断是否存在被复制的近重复帧。返回 None 表示这套 ffmpeg 不支持，别当成"零重复"。"""
     out = run(["ffmpeg", "-v", "info", "-i", video,
                "-vf", "mpdecimate=hi=64*8:lo=64*5:frac=0.28,showinfo",
                "-an", "-f", "null", "-"])
-    return len(re.findall(r"n:\s*\d+.*pts_time", out))
+    if "No such filter" in out or "Error opening output" in out:
+        return None
+    kept = len(re.findall(r"n:\s*\d+.*pts_time", out))
+    return kept or None
 
 
 def selftest():
@@ -128,7 +144,7 @@ def selftest():
     return rc
 
 
-def audit(video, threshold=None, ratio=0.333):
+def audit(video, threshold=None, ratio=0.333, event=None):
     info = probe(video)
     total_frames = 0
     try:
@@ -217,14 +233,30 @@ def audit(video, threshold=None, ratio=0.333):
         print("  [通过] 全片没有明显的静止区间。")
 
     print("运动能量最高点：%.2f 秒（%.2f）" % (peak_t, peak_v))
-    print("  检查这一秒是不是决胜段落。若最高点是转场、布料掠过或无关动作，说明重音配错。")
+    if event:
+        a, b = event
+        seg = [v for t, v in series if a <= t <= b]
+        seg_mean = sum(seg) / len(seg) if seg else 0.0
+        inside = a <= peak_t <= b
+        print("事件段 %.1f–%.1f 秒：均值 %.2f" % (a, b, seg_mean))
+        if inside:
+            print("  重音落位：[通过] 最高点落在事件段内。")
+        else:
+            print("  重音落位：[错位] 最高点在 %.2f 秒，事件段最平 —— 运镜或无关动作抢了重音，"
+                  "把运镜挪到事件前，或让它在事件后 0.5 秒再启动。" % peak_t)
+    else:
+        print("  检查这一秒是不是决胜段落。若最高点是转场、布料掠过或无关动作，说明重音配错。")
 
     kept = duplicate_check(video)
-    print("帧复制检查：mpdecimate 保留 %s 帧 / 总 %s 帧" % (kept, total_frames or "?"))
-    if total_frames and kept >= total_frames:
-        print("  [说明] 无重复帧 —— '慢' 不是编码或补帧造成的，是内容本身的动作密度不足。")
-    elif total_frames:
-        print("  [说明] 存在 %d 帧近乎重复，可能叠加了播放端的减速或补帧。" % (total_frames - kept))
+    if kept is None:
+        print("帧复制检查：跳过 —— 当前 ffmpeg 没有 mpdecimate 滤镜（剪映等精简版常见），"
+              "无法判断是否存在重复帧。")
+    else:
+        print("帧复制检查：mpdecimate 保留 %s 帧 / 总 %s 帧" % (kept, total_frames or "?"))
+        if total_frames and kept >= total_frames:
+            print("  [说明] 无重复帧 —— '慢' 不是编码或补帧造成的，是内容本身的动作密度不足。")
+        elif total_frames:
+            print("  [说明] 存在 %d 帧近乎重复，可能叠加了播放端的减速或补帧。" % (total_frames - kept))
 
     print()
     print("注意：本测量只能判断『动得够不够』，不能判断『打得对不对』。")
@@ -245,6 +277,7 @@ def main():
     video = None
     threshold = None
     ratio = 0.333
+    event = None
     i = 1
     while i < len(sys.argv):
         a = sys.argv[i]
@@ -252,6 +285,11 @@ def main():
             threshold = float(sys.argv[i + 1]); i += 2; continue
         if a == "--ratio" and i + 1 < len(sys.argv):
             ratio = float(sys.argv[i + 1]); i += 2; continue
+        if a == "--event" and i + 1 < len(sys.argv):
+            m = re.fullmatch(r"([0-9.]+)[-–~]([0-9.]+)", sys.argv[i + 1])
+            if not m:
+                print("--event 格式应为 7-9（秒）"); return 2
+            event = (float(m.group(1)), float(m.group(2))); i += 2; continue
         if a.startswith("-"):
             print("未知参数：%s" % a)
             print(__doc__)
@@ -264,7 +302,7 @@ def main():
         return 2
     if not require_ffmpeg() or not require_file(video):
         return 2
-    return audit(video, threshold, ratio)
+    return audit(video, threshold, ratio, event)
 
 
 if __name__ == "__main__":
