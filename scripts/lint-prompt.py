@@ -21,6 +21,7 @@
 用法：
     python lint-prompt.py draft.txt
     python lint-prompt.py draft.txt --duration 12 --images 2 --action
+    python lint-prompt.py draft.txt --beats        # 生活/对白戏：查一拍是否塞了多个动作
     python lint-prompt.py --selftest
 
 退出码：0 = 无阻断问题；1 = 有 FAIL；2 = 参数或文件错误。
@@ -450,7 +451,29 @@ def check_camera(text):
     return out
 
 
-def lint(text, duration=None, images=None, action=False):
+def check_beats(text):
+    """生活/对白戏专用（--beats）：一拍塞太多动作会糊。
+    产品片是静态质感、舞蹈是连续流动、动作片有密度指标，都不套这条。"""
+    rows = []
+    for line in text.split("\n"):
+        m = re.search(r"(\d+(?:\.\d+)?)\s*[–—~-]\s*(\d+(?:\.\d+)?)\s*s", line)
+        if not m:
+            continue
+        span = float(m.group(2)) - float(m.group(1))
+        cjk = len(re.findall(r"[\u4e00-\u9fff]", line))
+        if cjk < 12 or span <= 1.5:
+            continue
+        commas = line.count("，") + line.count("；")
+        if commas >= 3:
+            rows.append((float(m.group(1)), span, commas))
+    if rows:
+        a, span, c = rows[0]
+        return [(WARN, "节拍", "%d 拍跨度过大（如第 1 处 %.1fs 的拍里写了 %d 个分句）；生活戏按一拍一个可见变化、0.8–1.2 秒/拍拆开"
+                 % (len(rows), span, c))]
+    return [(PASS, "节拍", "时间块的行数与跨度匹配")]
+
+
+def lint(text, duration=None, images=None, action=False, beats=False):
     declared, raw = declared_duration(text)
     if duration is None:
         duration = declared
@@ -464,19 +487,21 @@ def lint(text, duration=None, images=None, action=False):
     results += check_conflict(text)
     results += check_limits(text, duration, images)
     results += check_format(text)
+    if beats:
+        results += check_beats(text)
     results += check_camera(text)
     if action:
         results += check_action(text)
     return results, declared, raw
 
 
-def report(name, results, declared, raw, duration, images, action):
+def report(name, results, declared, raw, duration, images, action, beats=False):
     print("=" * 66)
     print("文件：%s" % name)
     print("声明时长：%s   参考图：%s   模式：%s"
           % ("%g 秒（%s）" % (duration, raw) if duration else "未识别",
              "未给" if images is None else "%d 张" % images,
-             "动作片" if action else "普通"))
+             ("动作片" if action else "生活戏（查节拍）" if beats else "普通")))
     print("=" * 66)
     for level, cat, msg in results:
         print("[%-4s] %s：%s" % (level, cat, msg))
@@ -563,7 +588,7 @@ def main():
     if "--selftest" in args:
         return selftest()
 
-    path, duration, images, action = None, None, None, False
+    path, duration, images, action, beats = None, None, None, False, False
     i = 0
     while i < len(args):
         a = args[i]
@@ -573,6 +598,8 @@ def main():
             images = int(args[i + 1]); i += 2; continue
         if a == "--action":
             action = True; i += 1; continue
+        if a == "--beats":
+            beats = True; i += 1; continue
         if a.startswith("-"):
             print("未知参数：%s" % a); print(__doc__); return 2
         path = a; i += 1
@@ -582,8 +609,8 @@ def main():
         return 2
 
     text = read(path)
-    results, declared, raw = lint(text, duration, images, action)
-    return report(os.path.basename(path), results, declared, raw, duration or declared, images, action)
+    results, declared, raw = lint(text, duration, images, action, beats)
+    return report(os.path.basename(path), results, declared, raw, duration or declared, images, action, beats)
 
 
 if __name__ == "__main__":
