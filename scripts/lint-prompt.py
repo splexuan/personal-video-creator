@@ -413,6 +413,31 @@ def check_action(text):
         out.append((PASS, "动作密度", "动作动词粗估 %d 个；这是下限参考，单元总数仍需按稿人工数" % n))
     else:
         out.append((WARN, "动作密度", "没数到动作动词，确认是否写成了动作提纲"))
+
+    if re.search(r"(?:动作单元|单元总数|单元数|写作密度)[^\n。]{0,16}\d", text) or \
+       re.search(r"\d{2,3}\s*个单元", text):
+        out.append((PASS, "密度声明", "已写出单元总数或写作密度"))
+    else:
+        out.append((WARN, "密度声明", "没写动作单元总数或写作密度；动作类应先把总数定下来再写画面（见 pacing.md 第二节）"))
+    return out
+
+
+MOVES = re.compile(r"推进|推近|推轨|拉远|后拉|摇镜|横移|平移|环绕|跟拍|跟摇|升降|变焦|航拍|俯冲|甩镜")
+CONNECT = re.compile(r"同时|一边|一面|以及|并[同且行]|再加")
+
+
+def check_camera(text):
+    """一句里写两个主运镜，是画面崩掉的常见原因。"""
+    hits = []
+    for i, sent in enumerate(re.split(r"[。！？\n]", text), 1):
+        moves = set(MOVES.findall(sent))
+        if len(moves) >= 2 and CONNECT.search(sent):
+            hits.append((i, "、".join(sorted(moves)), sent.strip()[:26]))
+    if hits:
+        i, mv, snip = hits[0]
+        out = [(WARN, "运镜", "%d 处一句里出现两个主运镜（如「%s…」含 %s）；拆成相邻两拍" % (len(hits), snip, mv))]
+    else:
+        out = [(PASS, "运镜", "未发现一句多运镜")]
     return out
 
 
@@ -429,6 +454,7 @@ def lint(text, duration=None, images=None, action=False):
     results += check_constraints(text)
     results += check_conflict(text)
     results += check_limits(text, duration, images)
+    results += check_camera(text)
     if action:
         results += check_action(text)
     return results, declared, raw
@@ -471,6 +497,8 @@ GOOD = """▍格式
 [00:00-00:04] 他侧身让过，脚在地砖上滑出半步。
 [00:04-00:08] 对手一拳砸在卷闸上，卷闸凹进去一块。
 [00:08-00:12] 他抓住对手衣领往侧面拽，两人一起撞进积水里。
+▍动作密度
+动作单元 28 个，写作密度 2.3 单元/秒。
 ▍约束
 保持两人面部结构与服装一致。不要字幕，不要 BGM。
 """

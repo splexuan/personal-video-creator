@@ -126,6 +126,17 @@ def test_offline():
     assert any(r[0] == lp.FAIL and r[1] == "平台上限" for r in over), "参考图 40 张未报 FAIL"
     print("[通过] 回归 参考图 40 张              FAIL=1  超上限必须拦下")
 
+    # ---- 新增检查：单元总数、一句多运镜 ----
+    res, _, _ = lp.lint(open(os.path.join(fix_dir, "action-no-units.txt"), encoding="utf-8").read(),
+                        images=0, action=True)
+    warns = {r[1] for r in res if r[0] == lp.WARN}
+    assert "密度声明" in warns, "动作稿没写单元总数时未告警"
+    res, _, _ = lp.lint(open(os.path.join(fix_dir, "two-moves-one-shot.txt"), encoding="utf-8").read(),
+                        images=1)
+    warns = {r[1] for r in res if r[0] == lp.WARN}
+    assert "运镜" in warns, "一句多运镜未告警"
+    print("[通过] 定向回归：缺单元总数、一句多运镜都能报出")
+
     # ---- 目录一致性：catalog 与 index 的条数、★ 数必须对得上 ----
     lib = os.path.join(os.path.dirname(HERE), "references", "external-library")
     cat = open(os.path.join(lib, "catalog.md"), encoding="utf-8").read()
