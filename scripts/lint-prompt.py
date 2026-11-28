@@ -488,19 +488,25 @@ def check_beats(text):
     """生活/对白戏专用（--beats）：一拍塞太多动作会糊。
     产品片是静态质感、舞蹈是连续流动、动作片有密度指标，都不套这条。"""
     rows = []
+    beats = []
     for line in text.split("\n"):
         m = re.search(r"(\d+(?:\.\d+)?)\s*[–—~-]\s*(\d+(?:\.\d+)?)\s*s", line)
         if not m:
             continue
-        span = float(m.group(2)) - float(m.group(1))
+        beats.append((float(m.group(1)), float(m.group(2)), line))
+    last_end = max((b[1] for b in beats), default=None)
+    for start, end, line in beats:
+        span = end - start
+        if end == last_end:          # 收尾本来就要求 ≥2.5 秒，必然是长拍，不查
+            continue
         cjk = len(re.findall(r"[\u4e00-\u9fff]", line))
         if cjk < 12 or span <= 1.5:
             continue
         if re.search(r"[「“\"][^」”\"]{2,}[」”\"]", line):   # 对白为主的行不算压拍
             continue
         commas = line.count("，") + line.count("；")
-        if commas >= 3:
-            rows.append((float(m.group(1)), span, commas))
+        if commas >= 4:
+            rows.append((start, span, commas))
     if rows:
         a, span, c = rows[0]
         return [(WARN, "节拍", "%d 拍跨度过大（如第 1 处 %.1fs 的拍里写了 %d 个分句）；生活戏按一拍一个可见变化、0.8–1.2 秒/拍拆开"
