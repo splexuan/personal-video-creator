@@ -46,6 +46,13 @@ def extract_ranges(text):
     """返回 [(start, end, 原文), ...]，支持 [mm:ss-mm:ss]、0-4s、第 3 秒到第 7 秒。"""
     found = []
 
+    # 00:00.0–00:01.1（带小数的分:秒）
+    for m in re.finditer(r"(\d{1,2}):(\d{2})(?:\.(\d{1,2}))?\s*[–—~至-]\s*(\d{1,2}):(\d{2})(?:\.(\d{1,2}))?", text):
+        a = int(m.group(1)) * 60 + int(m.group(2)) + (float("0." + m.group(3)) if m.group(3) else 0)
+        b = int(m.group(4)) * 60 + int(m.group(5)) + (float("0." + m.group(6)) if m.group(6) else 0)
+        if b > a:
+            found.append((a, b, m.group(0)))
+
     for m in re.finditer(r"\[\s*(\d{1,2}):(\d{2})\s*[-–—~至]\s*(\d{1,2}):(\d{2})\s*\]", text):
         a = int(m.group(1)) * 60 + int(m.group(2))
         b = int(m.group(3)) * 60 + int(m.group(4))
@@ -81,25 +88,26 @@ def declared_duration(text):
         head = text[max(0, m.start() - 8):m.start()]
         if DUR_EXCLUDE.search(head):
             continue
-        return float(m.group(1)), m.group(0)
+        return float(m.group(1)), m.group(0), True
     for pat in (r"(?:生成|做|制作|拍)一(?:条|支|个)\s*(\d+(?:\.\d+)?)\s*秒",
                 r"(?:本次|成片|目标|完成片)\s*(?:时长)?\s*[：:为]?\s*(\d+(?:\.\d+)?)\s*秒"):
         m = re.search(pat, text)
         if m:
-            return float(m.group(1)), m.group(0)
+            return float(m.group(1)), m.group(0), True
     # 兜底：取第一个未被"参考/原片/样片"修饰的 N 秒。开头通常就是规格行；
     # 时间轴里的"8—15 秒"排在后面，不会被误当成总时长。
     cands = [m for m in re.finditer(r"(\d+(?:\.\d+)?)\s*秒", text)
-             if not DUR_EXCLUDE.search(text[max(0, m.start() - 8):m.start()])]
+             if not DUR_EXCLUDE.search(text[max(0, m.start() - 8):m.start()])
+             and not re.match(r"\s*(?:起|后|之后|时|左右|以内|内)", text[m.end():m.end() + 3])]
     if cands:
         m = cands[0]
-        return float(m.group(1)), m.group(0)
+        return float(m.group(1)), m.group(0), False
     # 英文稿："Create a 30-second, 16:9 ..." 这种开头写法。只认靠前的数字，
     # 避免把正文里的 "hold for 2 seconds" 当成总时长。
     m = re.search(r"(\d+(?:\.\d+)?)\s*[- ]?\s*(?:second|sec)s?\b", text[:120], re.I)
     if m:
-        return float(m.group(1)), m.group(0)
-    return None, None
+        return float(m.group(1)), m.group(0), False
+    return None, None, False
 
 
 def check_residue(text):
@@ -251,14 +259,18 @@ def split_brackets(text):
             end = len(text)
         line = text[start:end]
         standalone = re.fullmatch(r"\s*【[^】\n]{1,40}】\s*", line) is not None
-        items.append((line_of(text, m.start()), inner, standalone))
+        at_start = line.lstrip().startswith("【")
+        items.append((line_of(text, m.start()), inner, standalone, at_start))
 
     n_standalone = sum(1 for it in items if it[2])
+    n_at_start = sum(1 for it in items if it[3])
     headings, subtitles = [], []
-    for ln, inner, standalone in items:
-        if SUB_MARK.search(inner) or not standalone:
+    for ln, inner, standalone, at_start in items:
+        if SUB_MARK.search(inner):
             subtitles.append((ln, inner))
-        elif FIELD_WORDS.match(inner) or n_standalone >= 3:
+        elif at_start and (FIELD_WORDS.match(inner) or n_at_start >= 2):
+            headings.append((ln, inner))
+        elif standalone and (FIELD_WORDS.match(inner) or n_standalone >= 3):
             headings.append((ln, inner))
         else:
             subtitles.append((ln, inner))
@@ -427,7 +439,7 @@ MOVES = re.compile(r"推进|推近|推轨|拉远|后拉|摇镜|横移|平移|环
 CONNECT = re.compile(r"同时|一边|一面|以及|并|再加")
 
 
-ASPECT = re.compile(r"\b\d{1,2}:\d{1,2}\b|竖屏|横屏|竖向|横向|方形画幅")
+ASPECT = re.compile(r"\b(?:16:9|9:16|4:3|3:4|1:1|21:9|2\.35:1|2\.39:1)\b|竖屏|横屏|竖向|横向|方形画幅")
 
 
 def check_format(text):
@@ -463,6 +475,8 @@ def check_beats(text):
         cjk = len(re.findall(r"[\u4e00-\u9fff]", line))
         if cjk < 12 or span <= 1.5:
             continue
+        if re.search(r"[「“\"][^」”\"]{2,}[」”\"]", line):   # 对白为主的行不算压拍
+            continue
         commas = line.count("，") + line.count("；")
         if commas >= 3:
             rows.append((float(m.group(1)), span, commas))
@@ -474,9 +488,14 @@ def check_beats(text):
 
 
 def lint(text, duration=None, images=None, action=False, beats=False):
-    declared, raw = declared_duration(text)
+    declared, raw, explicit = declared_duration(text)
     if duration is None:
         duration = declared
+        # 没有明确标注时长时，以时间线末端为准——避免"20.7 秒起他退向…"这类叙述被当成总时长
+        rng = extract_ranges(text)
+        if rng and declared is None:
+            duration = max(r[1] for r in rng)
+            raw = "由时间线推断"
     results = []
     results += check_residue(text)
     results += check_timeline(text, duration)
@@ -492,7 +511,7 @@ def lint(text, duration=None, images=None, action=False, beats=False):
     results += check_camera(text)
     if action:
         results += check_action(text)
-    return results, declared, raw
+    return results, duration, raw
 
 
 def report(name, results, declared, raw, duration, images, action, beats=False):
@@ -609,8 +628,8 @@ def main():
         return 2
 
     text = read(path)
-    results, declared, raw = lint(text, duration, images, action, beats)
-    return report(os.path.basename(path), results, declared, raw, duration or declared, images, action, beats)
+    results, eff_duration, raw = lint(text, duration, images, action, beats)
+    return report(os.path.basename(path), results, eff_duration, raw, eff_duration, images, action, beats)
 
 
 if __name__ == "__main__":
