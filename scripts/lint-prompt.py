@@ -42,9 +42,30 @@ def read(path):
         return f.read()
 
 
+def _to_sec(tok):
+    if ":" in tok:
+        mm, ss = tok.split(":")
+        return int(mm) * 60 + float(ss)
+    return float(tok)
+
+
 def extract_ranges(text):
-    """返回 [(start, end, 原文), ...]，支持 [mm:ss-mm:ss]、0-4s、第 3 秒到第 7 秒。"""
+    """返回 [(start, end, 原文), ...]。
+    支持 [mm:ss-mm:ss]、00:00.0–03.0、0-4s、0—4 秒、第 3 秒到第 7 秒。"""
     found = []
+
+    # 行首时间码：00:00.0–03.0 或 03.0–07.5（不带单位，靠行首位置排除 24–70mm）
+    for line in text.split("\n"):
+        m = re.match(r"\s*((?:\d{1,2}:)?\d{1,2}(?::\d{2})?(?:\.\d{1,2})?)\s*[–—~-]\s*"
+                     r"((?:\d{1,2}:)?\d{1,2}(?::\d{2})?(?:\.\d{1,2})?)(?=\s|$)", line)
+        if not m:
+            continue
+        try:
+            a, b = _to_sec(m.group(1)), _to_sec(m.group(2))
+        except ValueError:
+            continue
+        if b > a and b <= 1800:
+            found.append((a, b, m.group(0).strip()))
 
     # 00:00.0–00:01.1（带小数的分:秒）
     for m in re.finditer(r"(\d{1,2}):(\d{2})(?:\.(\d{1,2}))?\s*[–—~至-]\s*(\d{1,2}):(\d{2})(?:\.(\d{1,2}))?", text):
