@@ -508,6 +508,59 @@ def check_beats(text):
     return [(PASS, "节拍", "时间块的行数与跨度匹配")]
 
 
+def detect_rate(text):
+    """从稿子里读语速区间（音拍/秒），返回 (慢, 快)；读不到默认 (5,5)。"""
+    vals = []
+    for m in re.finditer(r"(\d+(?:\.\d+)?)\s*(?:[-–~]\s*(\d+(?:\.\d+)?)\s*)?音拍", text):
+        vals.append(float(m.group(1)))
+        if m.group(2):
+            vals.append(float(m.group(2)))
+    if not vals:
+        return 5.0, 5.0
+    return max(3.5, min(vals)), min(8.0, max(vals))
+
+
+def check_dialogue_fit(text):
+    """台词字数 ÷ 语速 ≈ 需要秒数，和这一段跨度比。
+    只有"按最快语速也念不完"才告警；按慢速念不完的记为偏紧，不阻断。"""
+    slow, fast = detect_rate(text)
+    over, tight = [], []
+    for line in text.split("\n"):
+        m = re.match(r"\s*((?:\d{1,2}:)?\d{1,2}(?::\d{2})?(?:\.\d{1,2})?)\s*[–—~-]\s*"
+                     r"((?:\d{1,2}:)?\d{1,2}(?::\d{2})?(?:\.\d{1,2})?)(?=\s|$)", line)
+        if not m:
+            continue
+        try:
+            span = _to_sec(m.group(2)) - _to_sec(m.group(1))
+        except ValueError:
+            continue
+        quotes = re.findall(r"[「“\"]([^」”\"]{1,200})[」”\"]", line)
+        if not quotes or span <= 0:
+            continue
+        speech = "".join(quotes)
+        chars = len(re.findall(r"[\u4e00-\u9fff]", speech))   # 只按中文计音拍，英文稿跳过
+        if chars < 4:
+            continue
+        pauses = speech.count("，") * 0.15 + speech.count("、") * 0.1 + speech.count("。") * 0.25 \
+            + speech.count("？") * 0.25 + speech.count("！") * 0.25
+        need_fast = chars / fast + pauses
+        need_slow = chars / slow + pauses
+        if need_fast > span + 0.3:
+            over.append((chars, need_fast, span))
+        elif need_slow > span + 0.3:
+            tight.append((chars, need_slow, span))
+
+    if over:
+        c, need, span = max(over, key=lambda r: r[1] - r[2])
+        return [(WARN, "台词时长", "%d 处念不完：最长一句 %d 字即便按 %.1f 音拍/秒也要 %.1f 秒，这一段只有 %.1f 秒；删字或加时"
+                 % (len(over), c, fast, need, span))]
+    if tight:
+        c, need, span = max(tight, key=lambda r: r[1] - r[2])
+        return [(PASS, "台词时长", "%d 处偏紧（最长 %d 字按 %.1f 音拍/秒需 %.1f 秒，这段 %.1f 秒），按快速念能过"
+                 % (len(tight), c, slow, need, span))]
+    return [(PASS, "台词时长", "台词都能在段内念完（语速 %.1f–%.1f 音拍/秒）" % (slow, fast))]
+
+
 def lint(text, duration=None, images=None, action=False, beats=False):
     declared, raw, explicit = declared_duration(text)
     if duration is None:
@@ -527,6 +580,7 @@ def lint(text, duration=None, images=None, action=False, beats=False):
     results += check_conflict(text)
     results += check_limits(text, duration, images)
     results += check_format(text)
+    results += check_dialogue_fit(text)
     if beats:
         results += check_beats(text)
     results += check_camera(text)
